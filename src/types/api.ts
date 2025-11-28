@@ -12,12 +12,12 @@ export interface ApiResponse<T> {
 export interface ApiError {
   message: string;
   status: number;
-  details?: any;
+  details?: unknown;
 }
 
 export interface RequestConfig {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-  body?: any;
+  body?: unknown;
   headers?: HeadersInit;
   retries?: number;
   timeout?: number;

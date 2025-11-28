@@ -129,19 +129,20 @@ export class ApiClient {
   /**
    * Normalize errors to consistent format
    */
-  private normalizeError(error: any): ApiError {
-    if (error.name === 'AbortError') {
+  private normalizeError(error: unknown): ApiError {
+    if (error instanceof Error && error.name === 'AbortError') {
       return {
         message: 'Request timeout',
         status: 408,
       };
     }
 
-    if (error.message) {
+    if (typeof error === 'object' && error !== null && 'message' in error) {
+      const err = error as Record<string, unknown>;
       return {
-        message: error.message,
-        status: error.status || 500,
-        details: error.details,
+        message: String(err.message),
+        status: typeof err.status === 'number' ? err.status : 500,
+        details: err.details,
       };
     }
 
@@ -170,7 +171,7 @@ export class ApiClient {
 
   async post<T>(
     endpoint: string,
-    body?: any,
+    body?: unknown,
     options?: Omit<RequestConfig, 'method' | 'body'>
   ): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'POST', body });
@@ -178,7 +179,7 @@ export class ApiClient {
 
   async put<T>(
     endpoint: string,
-    body?: any,
+    body?: unknown,
     options?: Omit<RequestConfig, 'method' | 'body'>
   ): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'PUT', body });
@@ -186,7 +187,7 @@ export class ApiClient {
 
   async patch<T>(
     endpoint: string,
-    body?: any,
+    body?: unknown,
     options?: Omit<RequestConfig, 'method' | 'body'>
   ): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'PATCH', body });

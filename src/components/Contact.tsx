@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Mesh } from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Sphere, MeshDistortMaterial } from '@react-three/drei';
 import Footer from './Footer';
@@ -8,11 +9,12 @@ import InteractiveMap from './InteractiveMap';
 import Navbar from './Navbar';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { ApiService } from '../services/apiService';
+import { ContactFormData } from '../types/api';
 import { motion } from 'framer-motion';
 
 // Animated 3D Contact Icon
 const ContactIcon = () => {
-  const meshRef = useRef<any>(null);
+  const meshRef = useRef<Mesh>(null!);
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -74,7 +76,7 @@ const Contact = () => {
     };
 
     await handleSubmit(data, async (validData) => {
-      await ApiService.submitContactForm(validData as any);
+      await ApiService.submitContactForm(validData as unknown as ContactFormData);
       setIsSubmitted(true);
     });
   };
@@ -137,7 +139,7 @@ const Contact = () => {
               </div>
             )}
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} noValidate>
               <div className="mb-5 md:mb-6">
                 <label
                   htmlFor="name"

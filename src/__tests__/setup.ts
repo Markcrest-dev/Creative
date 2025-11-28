@@ -24,14 +24,14 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  disconnect() {}
-  observe() {}
+  constructor() { }
+  disconnect() { }
+  observe() { }
   takeRecords() {
     return [];
   }
-  unobserve() {}
-} as any;
+  unobserve() { }
+} as unknown as typeof IntersectionObserver;
 
 // Mock requestAnimationFrame for 3D animations
 global.requestAnimationFrame = vi.fn((callback) => {

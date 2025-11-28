@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { sanitizeFormData } from '../utils/sanitize';
 
 // Define types
@@ -85,19 +85,7 @@ export const useFormValidation = () => {
     [validateField]
   );
 
-  // Update field states with real-time validation
-  useEffect(() => {
-    const newState: Record<string, FieldState> = {};
-    Object.keys(fieldStates).forEach((fieldName) => {
-      const currentValue = fieldStates[fieldName]?.currentValue || '';
-      const validation = getRealTimeValidation(fieldName, currentValue);
-      newState[fieldName] = {
-        currentValue,
-        ...validation,
-      };
-    });
-    setFieldStates(newState);
-  }, [getRealTimeValidation]);
+
 
   // Validate entire form
   const validateForm = useCallback(
@@ -169,7 +157,9 @@ export const useFormValidation = () => {
       const newTouchedFields = allFields.reduce((acc, field) => ({ ...acc, [field]: true }), {});
       setTouchedFields(newTouchedFields);
 
-      if (!validateForm(sanitizedData)) return false;
+      if (!validateForm(sanitizedData)) {
+        return false;
+      }
 
       setIsSubmitting(true);
       try {
