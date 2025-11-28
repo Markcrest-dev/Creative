@@ -221,12 +221,13 @@ describe('useFormValidation', () => {
 
   it('sets isSubmitting to true during submission', async () => {
     const { result } = renderHook(() => useFormValidation());
-    let isSubmittingDuringCall = false;
 
-    const mockOnSubmit = vi.fn().mockImplementation(() => {
-      isSubmittingDuringCall = result.current.isSubmitting;
-      return Promise.resolve();
+    let resolveSubmit: () => void;
+    const submitPromise = new Promise<void>((resolve) => {
+      resolveSubmit = resolve;
     });
+
+    const mockOnSubmit = vi.fn().mockReturnValue(submitPromise);
 
     const formData = {
       name: 'John Doe',
@@ -235,11 +236,22 @@ describe('useFormValidation', () => {
       message: 'This is a valid test message',
     };
 
-    await act(async () => {
-      await result.current.handleSubmit(formData, mockOnSubmit);
+    let submitResult: Promise<boolean>;
+
+    // Start submission
+    act(() => {
+      submitResult = result.current.handleSubmit(formData, mockOnSubmit);
     });
 
-    expect(isSubmittingDuringCall).toBe(true);
+    // Check if isSubmitting is true while promise is pending
+    expect(result.current.isSubmitting).toBe(true);
+
+    // Resolve the promise to complete submission
+    await act(async () => {
+      if (resolveSubmit) resolveSubmit();
+      await submitResult;
+    });
+
     expect(result.current.isSubmitting).toBe(false);
   });
 });

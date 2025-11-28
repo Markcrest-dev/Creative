@@ -50,19 +50,110 @@ const App = () => {
           <Cart />
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<PageWrapper><EnhancedHero /></PageWrapper>} />
-              <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-              <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
-              <Route path="/services/:id" element={<PageWrapper><ProductDetail /></PageWrapper>} />
-              <Route path="/portfolio" element={<PageWrapper><Portfolio /></PageWrapper>} />
-              <Route path="/blog" element={<PageWrapper><Blog /></PageWrapper>} />
-              <Route path="/blog/:id" element={<PageWrapper><BlogPost /></PageWrapper>} />
-              <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-              <Route path="/styling-demo" element={<PageWrapper><AdvancedStylingDemo /></PageWrapper>} />
-              <Route path="/checkout" element={<PageWrapper><Checkout /></PageWrapper>} />
-              <Route path="/order-confirmation" element={<PageWrapper><OrderConfirmation /></PageWrapper>} />
-              <Route path="/privacy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
-              <Route path="/terms" element={<PageWrapper><Terms /></PageWrapper>} />
+              <Route
+                path="/"
+                element={
+                  <PageWrapper>
+                    <EnhancedHero />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <PageWrapper>
+                    <About />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/services"
+                element={
+                  <PageWrapper>
+                    <Services />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/services/:id"
+                element={
+                  <PageWrapper>
+                    <ProductDetail />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/portfolio"
+                element={
+                  <PageWrapper>
+                    <Portfolio />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/blog"
+                element={
+                  <PageWrapper>
+                    <Blog />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/blog/:id"
+                element={
+                  <PageWrapper>
+                    <BlogPost />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <PageWrapper>
+                    <Contact />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/styling-demo"
+                element={
+                  <PageWrapper>
+                    <AdvancedStylingDemo />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <PageWrapper>
+                    <Checkout />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/order-confirmation"
+                element={
+                  <PageWrapper>
+                    <OrderConfirmation />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/privacy"
+                element={
+                  <PageWrapper>
+                    <PrivacyPolicy />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/terms"
+                element={
+                  <PageWrapper>
+                    <Terms />
+                  </PageWrapper>
+                }
+              />
             </Routes>
           </AnimatePresence>
         </Suspense>

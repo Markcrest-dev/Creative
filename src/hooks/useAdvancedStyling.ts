@@ -9,10 +9,10 @@ export const useAdvancedStyling = () => {
   // Apply theme to document
   useEffect(() => {
     const applyTheme = (selectedTheme: 'light' | 'dark' | 'auto') => {
-      const isDark = 
-        selectedTheme === 'dark' || 
+      const isDark =
+        selectedTheme === 'dark' ||
         (selectedTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      
+
       if (isDark) {
         document.documentElement.classList.add('dark');
       } else {
@@ -21,7 +21,7 @@ export const useAdvancedStyling = () => {
     };
 
     applyTheme(theme);
-    
+
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
@@ -29,9 +29,9 @@ export const useAdvancedStyling = () => {
         applyTheme('auto');
       }
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
-    
+
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
@@ -40,7 +40,7 @@ export const useAdvancedStyling = () => {
   // Set CSS variables for custom colors
   useEffect(() => {
     const root = document.documentElement;
-    
+
     Object.entries(customColors).forEach(([key, value]) => {
       root.style.setProperty(`--${key}`, value);
     });
@@ -49,14 +49,14 @@ export const useAdvancedStyling = () => {
   // Toggle animations based on user preference
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     const updateAnimations = () => {
       setAnimationsEnabled(!mediaQuery.matches);
     };
-    
+
     updateAnimations();
     mediaQuery.addEventListener('change', updateAnimations);
-    
+
     return () => {
       mediaQuery.removeEventListener('change', updateAnimations);
     };
@@ -64,12 +64,12 @@ export const useAdvancedStyling = () => {
 
   // Set a custom color
   const setCustomColor = useCallback((name: string, value: string) => {
-    setCustomColors(prev => ({ ...prev, [name]: value }));
+    setCustomColors((prev) => ({ ...prev, [name]: value }));
   }, []);
 
   // Remove a custom color
   const removeCustomColor = useCallback((name: string) => {
-    setCustomColors(prev => {
+    setCustomColors((prev) => {
       const newColors = { ...prev };
       delete newColors[name];
       return newColors;
@@ -127,6 +127,6 @@ export const useAdvancedStyling = () => {
     applyGradient,
     applyTextGradient,
     applyFilter,
-    applyTransform
+    applyTransform,
   };
 };

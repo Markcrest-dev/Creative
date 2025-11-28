@@ -33,7 +33,7 @@ const Portfolio = () => {
         setProjects(data);
         setFilteredProjects(data);
       } catch (error) {
-        console.error("Failed to load portfolio data", error);
+        console.error('Failed to load portfolio data', error);
       } finally {
         setLoading(false);
       }
@@ -45,14 +45,15 @@ const Portfolio = () => {
     let result = projects;
 
     if (filter !== 'all') {
-      result = result.filter(project => project.category === filter);
+      result = result.filter((project) => project.category === filter);
     }
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(project =>
-        project.title.toLowerCase().includes(query) ||
-        project.description.toLowerCase().includes(query)
+      result = result.filter(
+        (project) =>
+          project.title.toLowerCase().includes(query) ||
+          project.description.toLowerCase().includes(query)
       );
     }
 
@@ -64,7 +65,7 @@ const Portfolio = () => {
     { id: 'web', label: 'Web Design' },
     { id: 'app', label: 'Mobile Apps' },
     { id: 'branding', label: 'Branding' },
-    { id: '3d', label: '3D & Motion' }
+    { id: '3d', label: '3D & Motion' },
   ];
 
   return (
@@ -97,10 +98,11 @@ const Portfolio = () => {
                 <button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === cat.id
-                    ? 'bg-black text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-100'
-                    }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    filter === cat.id
+                      ? 'bg-black text-white shadow-lg'
+                      : 'bg-white text-gray-600 hover:bg-gray-100'
+                  }`}
                 >
                   {cat.label}
                 </button>
@@ -125,10 +127,7 @@ const Portfolio = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
           </div>
         ) : (
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence>
               {filteredProjects.map((project) => (
                 <motion.div
@@ -159,9 +158,7 @@ const Portfolio = () => {
                     <h3 className="text-2xl font-bold mb-2 group-hover:text-orange-500 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
+                    <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
 
                     {/* Instructor Info */}
                     {project.instructor && (
@@ -173,7 +170,9 @@ const Portfolio = () => {
                           loading="lazy"
                         />
                         <div>
-                          <p className="text-sm font-bold text-gray-900">{project.instructor.name}</p>
+                          <p className="text-sm font-bold text-gray-900">
+                            {project.instructor.name}
+                          </p>
                           <p className="text-xs text-gray-500">{project.instructor.role}</p>
                         </div>
                       </div>
@@ -181,7 +180,10 @@ const Portfolio = () => {
 
                     <div className="mt-4 flex flex-wrap gap-2">
                       {project.results?.slice(0, 2).map((result, i) => (
-                        <span key={i} className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-md border border-green-100">
+                        <span
+                          key={i}
+                          className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-md border border-green-100"
+                        >
                           📈 {result}
                         </span>
                       ))}

@@ -10,11 +10,11 @@ import DOMPurify from 'dompurify';
  * Removes all HTML tags and potentially dangerous content
  */
 export const sanitizeHTML = (dirty: string): string => {
-    return DOMPurify.sanitize(dirty, {
-        ALLOWED_TAGS: [], // No HTML tags allowed
-        ALLOWED_ATTR: [], // No attributes allowed
-        KEEP_CONTENT: true, // Keep text content
-    });
+  return DOMPurify.sanitize(dirty, {
+    ALLOWED_TAGS: [], // No HTML tags allowed
+    ALLOWED_ATTR: [], // No attributes allowed
+    KEEP_CONTENT: true, // Keep text content
+  });
 };
 
 /**
@@ -22,17 +22,17 @@ export const sanitizeHTML = (dirty: string): string => {
  * Allows basic text but removes scripts and dangerous HTML
  */
 export const sanitizeInput = (input: string): string => {
-    if (!input) return '';
+  if (!input) return '';
 
-    // Remove all HTML tags
-    const cleaned = DOMPurify.sanitize(input, {
-        ALLOWED_TAGS: [],
-        ALLOWED_ATTR: [],
-        KEEP_CONTENT: true,
-    });
+  // Remove all HTML tags
+  const cleaned = DOMPurify.sanitize(input, {
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: [],
+    KEEP_CONTENT: true,
+  });
 
-    // Trim whitespace
-    return cleaned.trim();
+  // Trim whitespace
+  return cleaned.trim();
 };
 
 /**
@@ -40,14 +40,14 @@ export const sanitizeInput = (input: string): string => {
  * Basic validation and sanitization
  */
 export const sanitizeEmail = (email: string): string => {
-    if (!email) return '';
+  if (!email) return '';
 
-    // Remove HTML and trim
-    const cleaned = sanitizeInput(email);
+  // Remove HTML and trim
+  const cleaned = sanitizeInput(email);
 
-    // Basic email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(cleaned) ? cleaned.toLowerCase() : '';
+  // Basic email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(cleaned) ? cleaned.toLowerCase() : '';
 };
 
 /**
@@ -55,13 +55,13 @@ export const sanitizeEmail = (email: string): string => {
  * Keeps only digits, spaces, dashes, parentheses, and plus sign
  */
 export const sanitizePhone = (phone: string): string => {
-    if (!phone) return '';
+  if (!phone) return '';
 
-    // Remove HTML first
-    const cleaned = sanitizeInput(phone);
+  // Remove HTML first
+  const cleaned = sanitizeInput(phone);
 
-    // Keep only valid phone characters
-    return cleaned.replace(/[^0-9\s\-+()\s]/g, '');
+  // Keep only valid phone characters
+  return cleaned.replace(/[^0-9\s\-+()\s]/g, '');
 };
 
 /**
@@ -69,46 +69,45 @@ export const sanitizePhone = (phone: string): string => {
  * Ensures URL is safe and uses allowed protocols
  */
 export const sanitizeURL = (url: string): string => {
-    if (!url) return '';
+  if (!url) return '';
 
-    try {
-        const parsed = new URL(url);
+  try {
+    const parsed = new URL(url);
 
-        // Only allow safe protocols
-        const allowedProtocols = ['http:', 'https:', 'mailto:'];
+    // Only allow safe protocols
+    const allowedProtocols = ['http:', 'https:', 'mailto:'];
 
-        if (!allowedProtocols.includes(parsed.protocol)) {
-            return '';
-        }
-
-        return DOMPurify.sanitize(url, {
-            ALLOWED_TAGS: [],
-            ALLOWED_ATTR: [],
-        });
-    } catch {
-        // Invalid URL
-        return '';
+    if (!allowedProtocols.includes(parsed.protocol)) {
+      return '';
     }
+
+    return DOMPurify.sanitize(url, {
+      ALLOWED_TAGS: [],
+      ALLOWED_ATTR: [],
+    });
+  } catch {
+    // Invalid URL
+    return '';
+  }
 };
 
 /**
  * Sanitize object with multiple fields
  * Recursively sanitizes all string values in an object
  */
-export const sanitizeObject = <T extends Record<string, any>>(obj: T): T => {
-    const sanitized = {} as T;
+export const sanitizeObject = <T extends Record<string, unknown>>(obj: T): T => {
+  const sanitized = { ...obj };
 
-    for (const key in obj) {
-        if (typeof obj[key] === 'string') {
-            sanitized[key] = sanitizeInput(obj[key]) as any;
-        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-            sanitized[key] = sanitizeObject(obj[key]);
-        } else {
-            sanitized[key] = obj[key];
-        }
+  for (const key in obj) {
+    const value = obj[key];
+    if (typeof value === 'string') {
+      (sanitized as Record<string, unknown>)[key] = sanitizeInput(value);
+    } else if (typeof value === 'object' && value !== null) {
+      (sanitized as Record<string, unknown>)[key] = sanitizeObject(value as Record<string, unknown>);
     }
+  }
 
-    return sanitized;
+  return sanitized;
 };
 
 /**
@@ -116,31 +115,31 @@ export const sanitizeObject = <T extends Record<string, any>>(obj: T): T => {
  * Applies appropriate sanitization based on field names
  */
 export const sanitizeFormData = (data: Record<string, string>): Record<string, string> => {
-    const sanitized: Record<string, string> = {};
+  const sanitized: Record<string, string> = {};
 
-    for (const key in data) {
-        const value = data[key];
+  for (const key in data) {
+    const value = data[key];
 
-        switch (key.toLowerCase()) {
-            case 'email':
-                sanitized[key] = sanitizeEmail(value);
-                break;
-            case 'phone':
-            case 'telephone':
-            case 'mobile':
-                sanitized[key] = sanitizePhone(value);
-                break;
-            case 'url':
-            case 'website':
-            case 'link':
-                sanitized[key] = sanitizeURL(value);
-                break;
-            default:
-                sanitized[key] = sanitizeInput(value);
-        }
+    switch (key.toLowerCase()) {
+      case 'email':
+        sanitized[key] = sanitizeEmail(value);
+        break;
+      case 'phone':
+      case 'telephone':
+      case 'mobile':
+        sanitized[key] = sanitizePhone(value);
+        break;
+      case 'url':
+      case 'website':
+      case 'link':
+        sanitized[key] = sanitizeURL(value);
+        break;
+      default:
+        sanitized[key] = sanitizeInput(value);
     }
+  }
 
-    return sanitized;
+  return sanitized;
 };
 
 /**
@@ -148,18 +147,18 @@ export const sanitizeFormData = (data: Record<string, string>): Record<string, s
  * Returns true if input appears malicious
  */
 export const containsMaliciousContent = (input: string): boolean => {
-    if (!input) return false;
+  if (!input) return false;
 
-    // Check for common XSS patterns
-    const dangerousPatterns = [
-        /<script/i,
-        /javascript:/i,
-        /on\w+\s*=/i, // Event handlers like onclick=
-        /<iframe/i,
-        /<object/i,
-        /<embed/i,
-        /data:text\/html/i,
-    ];
+  // Check for common XSS patterns
+  const dangerousPatterns = [
+    /<script/i,
+    /javascript:/i,
+    /on\w+\s*=/i, // Event handlers like onclick=
+    /<iframe/i,
+    /<object/i,
+    /<embed/i,
+    /data:text\/html/i,
+  ];
 
-    return dangerousPatterns.some((pattern) => pattern.test(input));
+  return dangerousPatterns.some((pattern) => pattern.test(input));
 };

@@ -11,30 +11,74 @@ const NavBar = () => {
   return (
     <nav className="flex items-center justify-between p-4 md:p-6">
       {/* Logo */}
-      <Link to="/" className="text-xl md:text-2xl font-bold">CREATIVE<span className="text-orange-500">★</span></Link>
+      <Link to="/" className="text-xl md:text-2xl font-bold">
+        CREATIVE<span className="text-orange-500">★</span>
+      </Link>
 
       {/* Mobile Menu Button */}
       <button
         className="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
       >
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           {isMenuOpen ? (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           ) : (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           )}
         </svg>
       </button>
 
       {/* Menu Items */}
-      <div className={`absolute md:relative top-16 md:top-0 left-0 md:left-auto w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0 shadow-lg md:shadow-none ${isMenuOpen ? 'block' : 'hidden'} md:flex md:space-x-6 lg:space-x-8`}>
-        <Link to="/" className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm" onClick={() => setIsMenuOpen(false)}>Home</Link>
-        <Link to="/about" className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm" onClick={() => setIsMenuOpen(false)}>Agency</Link>
-        <Link to="/services" className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm" onClick={() => setIsMenuOpen(false)}>Services</Link>
-        <Link to="/portfolio" className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
-        <Link to="/contact" className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+      <div
+        className={`absolute md:relative top-16 md:top-0 left-0 md:left-auto w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0 shadow-lg md:shadow-none ${isMenuOpen ? 'block' : 'hidden'} md:flex md:space-x-6 lg:space-x-8`}
+      >
+        <Link
+          to="/"
+          className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Home
+        </Link>
+        <Link
+          to="/about"
+          className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Agency
+        </Link>
+        <Link
+          to="/services"
+          className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Services
+        </Link>
+        <Link
+          to="/portfolio"
+          className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Portfolio
+        </Link>
+        <Link
+          to="/contact"
+          className="block md:inline-block py-3 md:py-0 hover:text-orange-500 transition-colors duration-300 text-base md:text-sm"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Contact
+        </Link>
       </div>
 
       {/* Let's Talk Button */}
@@ -60,17 +104,25 @@ const Hero = () => {
           {/* Left Column */}
           <div className="lg:w-1/2 w-full">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-              Transform Your <span className="text-orange-500">★</span> Digital <span className="text-orange-500">★</span> Experience
+              Transform Your <span className="text-orange-500">★</span> Digital{' '}
+              <span className="text-orange-500">★</span> Experience
             </h1>
 
             <div className="flex flex-wrap gap-2 md:gap-3 mb-4 md:mb-6">
-              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">Innovation</span>
-              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">Design</span>
-              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">Technology</span>
+              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">
+                Innovation
+              </span>
+              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">
+                Design
+              </span>
+              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">
+                Technology
+              </span>
             </div>
 
             <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 max-w-xl">
-              Elevate your brand with cutting-edge digital solutions that captivate your audience and drive results.
+              Elevate your brand with cutting-edge digital solutions that captivate your audience
+              and drive results.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">

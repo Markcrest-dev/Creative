@@ -19,7 +19,7 @@ const EnhancedHero = () => {
             className="lg:w-1/2 w-full"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <motion.h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight"
@@ -27,7 +27,8 @@ const EnhancedHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Transform Your <span className="text-orange-500">★</span> Digital <span className="text-orange-500">★</span> Experience
+              Transform Your <span className="text-orange-500">★</span> Digital{' '}
+              <span className="text-orange-500">★</span> Experience
             </motion.h1>
 
             <motion.div
@@ -36,9 +37,15 @@ const EnhancedHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">Innovation</span>
-              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">Design</span>
-              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">Technology</span>
+              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">
+                Innovation
+              </span>
+              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">
+                Design
+              </span>
+              <span className="bg-gray-200 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wide">
+                Technology
+              </span>
             </motion.div>
 
             <motion.p
@@ -47,7 +54,8 @@ const EnhancedHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              Elevate your brand with cutting-edge digital solutions that captivate your audience and drive results.
+              Elevate your brand with cutting-edge digital solutions that captivate your audience
+              and drive results.
             </motion.p>
 
             <motion.div
@@ -74,7 +82,7 @@ const EnhancedHero = () => {
             className="lg:w-1/2 w-full h-64 sm:h-80 md:h-96 lg:h-[500px] relative"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <AnimatedLogo />
           </motion.div>

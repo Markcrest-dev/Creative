@@ -14,7 +14,7 @@ export const use3DAnimations = () => {
     const handleMouseMove = (event: MouseEvent) => {
       setMousePosition({
         x: (event.clientX / window.innerWidth) * 2 - 1,
-        y: -(event.clientY / window.innerHeight) * 2 + 1
+        y: -(event.clientY / window.innerHeight) * 2 + 1,
       });
     };
 
@@ -31,54 +31,63 @@ export const use3DAnimations = () => {
   }, []);
 
   // Advanced animation loop with scroll-based effects
-  const animate3D = useCallback((state: any, delta: number) => {
-    if (groupRef.current) {
-      // Gentle floating animation
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+  const animate3D = useCallback(
+    (state: any, delta: number) => {
+      if (groupRef.current) {
+        // Gentle floating animation
+        groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
-      // Subtle rotation based on time
-      groupRef.current.rotation.y += delta * 0.2;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
+        // Subtle rotation based on time
+        groupRef.current.rotation.y += delta * 0.2;
+        groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
 
-      // Mouse-based interaction
-      if (isIntersecting) {
-        groupRef.current.rotation.y += mousePosition.x * 0.005;
-        groupRef.current.rotation.x += mousePosition.y * 0.005;
+        // Mouse-based interaction
+        if (isIntersecting) {
+          groupRef.current.rotation.y += mousePosition.x * 0.005;
+          groupRef.current.rotation.x += mousePosition.y * 0.005;
+        }
+
+        // Scroll-based scaling effect
+        const scale = 1 + Math.sin(scrollY * 0.01) * 0.1;
+        groupRef.current.scale.set(scale, scale, scale);
       }
-
-      // Scroll-based scaling effect
-      const scale = 1 + Math.sin(scrollY * 0.01) * 0.1;
-      groupRef.current.scale.set(scale, scale, scale);
-    }
-  }, [isIntersecting, mousePosition, scrollY]);
+    },
+    [isIntersecting, mousePosition, scrollY]
+  );
 
   // Morphing effect for advanced 3D objects
-  const morphGeometry = useCallback((geometry: THREE.BufferGeometry, targetGeometry: THREE.BufferGeometry, progress: number) => {
-    if (!geometry.attributes.position || !targetGeometry.attributes.position) return;
+  const morphGeometry = useCallback(
+    (geometry: THREE.BufferGeometry, targetGeometry: THREE.BufferGeometry, progress: number) => {
+      if (!geometry.attributes.position || !targetGeometry.attributes.position) return;
 
-    const positionAttribute = geometry.attributes.position;
-    const targetPositionAttribute = targetGeometry.attributes.position;
+      const positionAttribute = geometry.attributes.position;
+      const targetPositionAttribute = targetGeometry.attributes.position;
 
-    if (positionAttribute.count !== targetPositionAttribute.count) return;
+      if (positionAttribute.count !== targetPositionAttribute.count) return;
 
-    const positions = positionAttribute.array as Float32Array;
-    const targetPositions = targetPositionAttribute.array as Float32Array;
+      const positions = positionAttribute.array as Float32Array;
+      const targetPositions = targetPositionAttribute.array as Float32Array;
 
-    for (let i = 0; i < positions.length; i++) {
-      positions[i] = THREE.MathUtils.lerp(positions[i], targetPositions[i], progress);
-    }
+      for (let i = 0; i < positions.length; i++) {
+        positions[i] = THREE.MathUtils.lerp(positions[i], targetPositions[i], progress);
+      }
 
-    positionAttribute.needsUpdate = true;
-  }, []);
+      positionAttribute.needsUpdate = true;
+    },
+    []
+  );
 
   // Complex animation sequence
-  const runAnimationSequence = useCallback((sequence: Array<(state: any, delta: number) => void>, currentIndex: number) => {
-    return (state: any, delta: number) => {
-      if (currentIndex < sequence.length) {
-        sequence[currentIndex](state, delta);
-      }
-    };
-  }, []);
+  const runAnimationSequence = useCallback(
+    (sequence: Array<(state: any, delta: number) => void>, currentIndex: number) => {
+      return (state: any, delta: number) => {
+        if (currentIndex < sequence.length) {
+          sequence[currentIndex](state, delta);
+        }
+      };
+    },
+    []
+  );
 
   return {
     isIntersecting,
@@ -89,6 +98,6 @@ export const use3DAnimations = () => {
     groupRef,
     animate3D,
     morphGeometry,
-    runAnimationSequence
+    runAnimationSequence,
   };
 };

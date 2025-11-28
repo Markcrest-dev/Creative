@@ -1,12 +1,11 @@
-
 import { useAppContext, useNotifications } from '../context/AppContext';
 
 const Notification = () => {
   const { state } = useAppContext();
   const { removeNotification } = useNotifications();
-  
+
   if (state.notifications.length === 0) return null;
-  
+
   return (
     <div className="fixed top-4 right-4 z-50 space-y-2">
       {state.notifications.map((notification) => (
@@ -16,10 +15,10 @@ const Notification = () => {
             notification.type === 'success'
               ? 'bg-green-100 border border-green-400 text-green-700'
               : notification.type === 'error'
-              ? 'bg-red-100 border border-red-400 text-red-700'
-              : notification.type === 'warning'
-              ? 'bg-yellow-100 border border-yellow-400 text-yellow-700'
-              : 'bg-blue-100 border border-blue-400 text-blue-700'
+                ? 'bg-red-100 border border-red-400 text-red-700'
+                : notification.type === 'warning'
+                  ? 'bg-yellow-100 border border-yellow-400 text-yellow-700'
+                  : 'bg-blue-100 border border-blue-400 text-blue-700'
           }`}
         >
           <div className="flex justify-between items-start">

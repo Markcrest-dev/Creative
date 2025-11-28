@@ -1,16 +1,24 @@
 import { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Box, Octahedron } from '@react-three/drei';
 import { motion, useInView } from 'framer-motion';
 import Footer from './Footer';
-import CompactAnimatedLogo from './CompactAnimatedLogo';
 import { useCart } from '../context/CartContext';
 import Navbar from './Navbar';
 import type * as THREE from 'three';
+import { PRODUCT_CATEGORIES } from '../data/products';
 
 // 3D Product Icon Component with animation
-const ProductIcon = ({ type, color, isActive }: { type: 'course' | 'asset'; color: string; isActive: boolean }) => {
+const ProductIcon = ({
+  type,
+  color,
+  isActive,
+}: {
+  type: 'course' | 'asset';
+  color: string;
+  isActive: boolean;
+}) => {
   const meshRef = useRef<THREE.Mesh>(null!);
 
   useFrame((state) => {
@@ -53,7 +61,7 @@ const ProductIcon = ({ type, color, isActive }: { type: 'course' | 'asset'; colo
 // Product/Course Card
 const ProductCard = ({ product, index }: { product: any; index: number }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
   const [isHovered, setIsHovered] = useState(false);
   const { addItem } = useCart();
   const navigate = useNavigate();
@@ -68,7 +76,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       id: product.title.toLowerCase().replace(/ /g, '-'),
       title: product.title,
       price: product.price,
-      type: product.type
+      type: product.type,
     });
   };
 
@@ -80,7 +88,10 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -10, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+      whileHover={{
+        y: -10,
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+      }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
@@ -109,7 +120,12 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center space-x-1">
             {[...Array(5)].map((_, i) => (
-              <span key={i} className={`text-sm ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>
+              <span
+                key={i}
+                className={`text-sm ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+              >
+                ★
+              </span>
             ))}
             <span className="text-xs text-gray-500 ml-1">({product.reviews})</span>
           </div>
@@ -119,9 +135,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
           {product.title}
         </h3>
 
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
-          {product.description}
-        </p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">{product.description}</p>
 
         <div className="space-y-3 mt-auto">
           <div className="flex flex-wrap gap-2">
@@ -151,113 +165,8 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
 };
 
 const Services = () => {
-  const { items, toggleCart } = useCart();
-
   // Products & Courses Data
-  const products = [
-    {
-      category: "Masterclasses & Courses",
-      description: "Level up your skills with our expert-led creative courses.",
-      items: [
-        {
-          title: "Advanced 3D Web Design",
-          description: "Learn how to build immersive 3D websites using Three.js, React Three Fiber, and WebGL. Master lighting, textures, and performance optimization.",
-          price: 149,
-          rating: 5,
-          reviews: 128,
-          type: "course",
-          color: "#F97316",
-          tags: ["Three.js", "React", "WebGL"]
-        },
-        {
-          title: "UI/UX Design Mastery",
-          description: "From wireframes to high-fidelity prototypes. Learn the complete design process used by top agencies.",
-          price: 99,
-          rating: 4.8,
-          reviews: 85,
-          type: "course",
-          color: "#3B82F6",
-          tags: ["Figma", "Design Systems", "UX"]
-        },
-        {
-          title: "Creative Frontend Architecture",
-          description: "Build scalable, maintainable, and high-performance frontend applications. Deep dive into React patterns and state management.",
-          price: 129,
-          rating: 4.9,
-          reviews: 210,
-          type: "course",
-          color: "#10B981",
-          tags: ["Architecture", "Performance", "React"]
-        },
-        {
-          title: "Three.js Shaders Masterclass",
-          description: "Unlock the true power of WebGL with custom shaders. Create mind-bending visual effects.",
-          price: 119,
-          rating: 5.0,
-          reviews: 45,
-          type: "course",
-          color: "#8B5CF6",
-          tags: ["GLSL", "Shaders", "Math"]
-        }
-      ]
-    },
-    {
-      category: "Digital Assets & Templates",
-      description: "Premium resources to speed up your workflow.",
-      items: [
-        {
-          title: "Ultimate 3D Icon Pack",
-          description: "A collection of 50+ high-quality 3D icons ready to drop into your React projects. Fully customizable colors and materials.",
-          price: 49,
-          rating: 5,
-          reviews: 342,
-          type: "asset",
-          color: "#8B5CF6",
-          tags: ["Icons", "3D Models", "GLTF"]
-        },
-        {
-          title: "Agency Website Template",
-          description: "The exact code base used for this website. Includes all animations, 3D components, and responsive layouts.",
-          price: 79,
-          rating: 4.7,
-          reviews: 56,
-          type: "asset",
-          color: "#EC4899",
-          tags: ["Template", "React", "Tailwind"]
-        },
-        {
-          title: "Motion Graphics Bundle",
-          description: "Pack of 20 smooth Framer Motion variants and transitions for React applications.",
-          price: 29,
-          rating: 4.9,
-          reviews: 112,
-          type: "asset",
-          color: "#F59E0B",
-          tags: ["Animation", "Framer Motion", "UI"]
-        },
-        {
-          title: "Abstract 3D Backgrounds",
-          description: "10 stunning, looped 4K video backgrounds for hero sections.",
-          price: 39,
-          rating: 4.8,
-          reviews: 89,
-          type: "asset",
-          color: "#6366F1",
-          tags: ["Video", "Backgrounds", "3D"]
-        },
-        {
-          title: "Minimalist Figma UI Kit",
-          description: "A clean, modern UI kit with over 200 components and auto-layout ready.",
-          price: 59,
-          rating: 4.9,
-          reviews: 230,
-          type: "asset",
-          color: "#10B981",
-          tags: ["Figma", "UI Kit", "Design"]
-        }
-      ]
-    }
-  ];
+  const products = PRODUCT_CATEGORIES;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -292,7 +201,8 @@ const Services = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Premium courses, digital assets, and tools to help you build better, faster, and more creatively.
+            Premium courses, digital assets, and tools to help you build better, faster, and more
+            creatively.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -319,7 +229,9 @@ const Services = () => {
                 transition={{ duration: 0.5 }}
               >
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900">{category.category}</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900">
+                    {category.category}
+                  </h2>
                   <p className="text-gray-600 text-lg">{category.description}</p>
                 </div>
                 <button className="hidden md:block text-orange-500 font-bold hover:text-orange-600 transition-colors mt-4 md:mt-0">
@@ -329,11 +241,7 @@ const Services = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {category.items.map((product, index) => (
-                  <ProductCard
-                    key={index}
-                    product={product}
-                    index={index}
-                  />
+                  <ProductCard key={index} product={product} index={index} />
                 ))}
               </div>
 
@@ -357,7 +265,8 @@ const Services = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Why Learn With Us?</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We don't just teach theory. We teach the exact techniques and workflows we use to build award-winning projects for our clients.
+              We don't just teach theory. We teach the exact techniques and workflows we use to
+              build award-winning projects for our clients.
             </p>
           </div>
 
@@ -367,21 +276,27 @@ const Services = () => {
                 🎓
               </div>
               <h3 className="text-xl font-bold mb-2">Expert Instructors</h3>
-              <p className="text-gray-600 text-sm">Learn from senior developers and designers with 10+ years of industry experience.</p>
+              <p className="text-gray-600 text-sm">
+                Learn from senior developers and designers with 10+ years of industry experience.
+              </p>
             </div>
             <div className="p-4">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
                 🚀
               </div>
               <h3 className="text-xl font-bold mb-2">Project-Based Learning</h3>
-              <p className="text-gray-600 text-sm">Build real-world projects that you can add to your portfolio immediately.</p>
+              <p className="text-gray-600 text-sm">
+                Build real-world projects that you can add to your portfolio immediately.
+              </p>
             </div>
             <div className="p-4">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
                 🔄
               </div>
               <h3 className="text-xl font-bold mb-2">Lifetime Updates</h3>
-              <p className="text-gray-600 text-sm">Get free updates whenever we add new content or update our techniques.</p>
+              <p className="text-gray-600 text-sm">
+                Get free updates whenever we add new content or update our techniques.
+              </p>
             </div>
           </div>
         </motion.div>

@@ -10,7 +10,7 @@ const AdvancedStylingDemo = () => {
     applyGradient,
     applyTextGradient,
     applyFilter,
-    applyTransform
+    applyTransform,
   } = useAdvancedStyling();
 
   // Apply styles on component mount
@@ -19,13 +19,13 @@ const AdvancedStylingDemo = () => {
     setCustomColor('primary', '#f97316');
     setCustomColor('secondary', '#3b82f6');
     setCustomColor('accent', '#10b981');
-    
+
     // Apply gradients after a short delay to ensure elements are rendered
     const timer = setTimeout(() => {
       applyGradient('gradient-box', ['#f97316', '#3b82f6', '#10b981']);
       applyTextGradient('gradient-text', ['#f97316', '#3b82f6']);
     }, 100);
-    
+
     return () => clearTimeout(timer);
   }, [setCustomColor, applyGradient, applyTextGradient]);
 
@@ -44,10 +44,7 @@ const AdvancedStylingDemo = () => {
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 
-            id="gradient-text"
-            className="text-4xl md:text-5xl font-bold mb-4"
-          >
+          <h1 id="gradient-text" className="text-4xl md:text-5xl font-bold mb-4">
             Advanced Styling Demo
           </h1>
           <p className="text-lg text-gray-600">
@@ -62,8 +59,8 @@ const AdvancedStylingDemo = () => {
             <button
               onClick={() => setTheme('light')}
               className={`px-4 py-2 rounded-lg transition-all ${
-                theme === 'light' 
-                  ? 'bg-orange-500 text-white' 
+                theme === 'light'
+                  ? 'bg-orange-500 text-white'
                   : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
               }`}
             >
@@ -72,8 +69,8 @@ const AdvancedStylingDemo = () => {
             <button
               onClick={() => setTheme('dark')}
               className={`px-4 py-2 rounded-lg transition-all ${
-                theme === 'dark' 
-                  ? 'bg-orange-500 text-white' 
+                theme === 'dark'
+                  ? 'bg-orange-500 text-white'
                   : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
               }`}
             >
@@ -82,8 +79,8 @@ const AdvancedStylingDemo = () => {
             <button
               onClick={() => setTheme('auto')}
               className={`px-4 py-2 rounded-lg transition-all ${
-                theme === 'auto' 
-                  ? 'bg-orange-500 text-white' 
+                theme === 'auto'
+                  ? 'bg-orange-500 text-white'
                   : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
               }`}
             >
@@ -95,10 +92,7 @@ const AdvancedStylingDemo = () => {
         {/* Gradient Demo */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold mb-4">Gradient Effects</h2>
-          <div 
-            id="gradient-box"
-            className="h-48 rounded-lg mb-4 transition-all duration-500"
-          />
+          <div id="gradient-box" className="h-48 rounded-lg mb-4 transition-all duration-500" />
           <p className="text-gray-600">
             This box demonstrates dynamic gradient backgrounds applied via JavaScript.
           </p>
@@ -109,11 +103,11 @@ const AdvancedStylingDemo = () => {
           <h2 className="text-2xl font-bold mb-4">Animation Controls</h2>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-gray-700">Animations:</span>
-            <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-              animationsEnabled 
-                ? 'bg-green-100 text-green-800' 
-                : 'bg-red-100 text-red-800'
-            }`}>
+            <span
+              className={`px-3 py-1 rounded-full text-sm font-medium ${
+                animationsEnabled ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}
+            >
               {animationsEnabled ? 'Enabled' : 'Disabled'}
             </span>
           </div>

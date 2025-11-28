@@ -8,12 +8,7 @@ interface TooltipProps {
   delay?: number;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({
-  content,
-  children,
-  position = 'top',
-  delay = 500
-}) => {
+const Tooltip: React.FC<TooltipProps> = ({ content, children, position = 'top', delay = 500 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const childRef = useRef<HTMLDivElement>(null);
@@ -30,25 +25,25 @@ const Tooltip: React.FC<TooltipProps> = ({
         case 'top':
           setTooltipPosition({
             x: rect.left + rect.width / 2 + scrollLeft,
-            y: rect.top + scrollTop - 10
+            y: rect.top + scrollTop - 10,
           });
           break;
         case 'bottom':
           setTooltipPosition({
             x: rect.left + rect.width / 2 + scrollLeft,
-            y: rect.bottom + scrollTop + 10
+            y: rect.bottom + scrollTop + 10,
           });
           break;
         case 'left':
           setTooltipPosition({
             x: rect.left + scrollLeft - 10,
-            y: rect.top + rect.height / 2 + scrollTop
+            y: rect.top + rect.height / 2 + scrollTop,
           });
           break;
         case 'right':
           setTooltipPosition({
             x: rect.right + scrollLeft + 10,
-            y: rect.top + rect.height / 2 + scrollTop
+            y: rect.top + rect.height / 2 + scrollTop,
           });
           break;
       }
@@ -77,7 +72,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     top: 'top-full left-1/2 transform -translate-x-1/2 border-t-orange-500',
     bottom: 'bottom-full left-1/2 transform -translate-x-1/2 border-b-orange-500',
     left: 'left-full top-1/2 transform -translate-y-1/2 border-l-orange-500',
-    right: 'right-full top-1/2 transform -translate-y-1/2 border-r-orange-500'
+    right: 'right-full top-1/2 transform -translate-y-1/2 border-r-orange-500',
   };
 
   return (
@@ -95,11 +90,12 @@ const Tooltip: React.FC<TooltipProps> = ({
           style={{
             left: tooltipPosition.x,
             top: tooltipPosition.y,
-            transform: position === 'top' || position === 'bottom'
-              ? 'translateX(-50%)'
-              : position === 'left' || position === 'right'
-                ? 'translateY(-50%)'
-                : 'none'
+            transform:
+              position === 'top' || position === 'bottom'
+                ? 'translateX(-50%)'
+                : position === 'left' || position === 'right'
+                  ? 'translateY(-50%)'
+                  : 'none',
           }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
