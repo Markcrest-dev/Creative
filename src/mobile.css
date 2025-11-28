@@ -1,0 +1,56 @@
+/* Mobile-specific styles */
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Adjust 3D canvas height for better mobile experience */
+  .canvas-container {
+    height: 200px;
+  }
+  
+  /* Reduce padding on mobile */
+  .section-padding {
+    padding: 1rem;
+  }
+  
+  /* Stack buttons vertically on mobile */
+  .button-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Improve form field spacing on mobile */
+  .form-field {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Adjust card padding on mobile */
+  .card-padding {
+    padding: 1rem;
+  }
+}
+
+/* Hide desktop-only elements on mobile */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* Show mobile-only elements on mobile */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
+/* Hide mobile-only elements on desktop */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+}

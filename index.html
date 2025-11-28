@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https:;
+      frame-src 'self' https://www.google.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    " />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Creative★ Agency - Transform your digital experience with cutting-edge design and technology solutions" />
+    <meta name="keywords" content="creative agency, web design, 3D design, digital solutions, branding" />
+    <meta name="author" content="Creative Agency Team" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Creative★ Agency" />
+    <meta property="og:description" content="Transform your digital experience with cutting-edge design and technology" />
+    <meta property="og:type" content="website" />
+    
+    <title>Creative★ Agency - Digital Design & Development</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
