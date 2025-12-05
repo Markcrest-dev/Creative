@@ -1,3 +1,5 @@
+import { cacheManager } from '../utils/cacheUtils';
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -79,7 +81,7 @@ const MOCK_POSTS: BlogPost[] = [
     date: 'Oct 28, 2024',
     readTime: '6 min read',
     image:
-      'https://images.unsplash.com/photo-1586717791821-3f44a5638d48?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=2070&auto=format&fit=crop',
     category: 'Systems',
   },
   {
@@ -123,7 +125,7 @@ const MOCK_POSTS: BlogPost[] = [
     date: 'Oct 05, 2024',
     readTime: '4 min read',
     image:
-      'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2070&auto=format&fit=crop',
     category: 'Design',
   },
   {
@@ -150,19 +152,96 @@ const MOCK_POSTS: BlogPost[] = [
   },
 ];
 
+// Cache configuration
+const CACHE_TTL = {
+  POSTS: 60 * 60 * 1000, // 1 hour for posts list
+  POST: 60 * 60 * 1000, // 1 hour for individual posts
+  CATEGORIES: 24 * 60 * 60 * 1000, // 24 hours for categories
+};
+
 export const ContentService = {
   getPosts: async (): Promise<BlogPost[]> => {
+    const cacheKey = 'blog_posts_all';
+
+    // Try to get from cache first
+    const cached = cacheManager.get<BlogPost[]>(cacheKey);
+    if (cached) {
+      console.log('[ContentService] Serving posts from cache');
+      return cached;
+    }
+
+    // Fetch fresh data
+    console.log('[ContentService] Fetching fresh posts');
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
-    return MOCK_POSTS;
+    const posts = MOCK_POSTS;
+
+    // Cache the result
+    cacheManager.set(cacheKey, posts, {
+      ttl: CACHE_TTL.POSTS,
+      storage: 'both', // Memory + localStorage
+    });
+
+    return posts;
   },
 
   getPostById: async (id: string): Promise<BlogPost | undefined> => {
+    const cacheKey = `blog_post_${id}`;
+
+    // Try to get from cache first
+    const cached = cacheManager.get<BlogPost>(cacheKey);
+    if (cached) {
+      console.log(`[ContentService] Serving post ${id} from cache`);
+      return cached;
+    }
+
+    // Fetch fresh data
+    console.log(`[ContentService] Fetching fresh post ${id}`);
     await new Promise((resolve) => setTimeout(resolve, 300));
-    return MOCK_POSTS.find((post) => post.id === id);
+    const post = MOCK_POSTS.find((post) => post.id === id);
+
+    // Cache the result if found
+    if (post) {
+      cacheManager.set(cacheKey, post, {
+        ttl: CACHE_TTL.POST,
+        storage: 'both',
+      });
+    }
+
+    return post;
   },
 
   getCategories: async (): Promise<string[]> => {
-    return ['All', ...Array.from(new Set(MOCK_POSTS.map((post) => post.category)))];
+    const cacheKey = 'blog_categories';
+
+    // Try to get from cache first
+    const cached = cacheManager.get<string[]>(cacheKey);
+    if (cached) {
+      console.log('[ContentService] Serving categories from cache');
+      return cached;
+    }
+
+    // Generate fresh data
+    console.log('[ContentService] Generating fresh categories');
+    const categories = ['All', ...Array.from(new Set(MOCK_POSTS.map((post) => post.category)))];
+
+    // Cache the result
+    cacheManager.set(cacheKey, categories, {
+      ttl: CACHE_TTL.CATEGORIES,
+      storage: 'both',
+    });
+
+    return categories;
+  },
+
+  // Clear all content caches
+  clearCache: (): void => {
+    console.log('[ContentService] Clearing all content caches');
+    cacheManager.remove('blog_posts_all');
+    cacheManager.remove('blog_categories');
+    // Clear individual post caches
+    MOCK_POSTS.forEach((post) => {
+      cacheManager.remove(`blog_post_${post.id}`);
+    });
   },
 };

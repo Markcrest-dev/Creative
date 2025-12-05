@@ -1,0 +1,40 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.14 [39m[90m/home/mark/Desktop/Creative[39m
+
+[90mstdout[2m | src/__tests__/Contact.test.tsx[2m > [22m[2mContact Component[2m > [22m[2mvalidates inputs and shows errors
+[22m[39mContact form submitted
+Sanitized Data: { name: [32m''[39m, email: [32m''[39m, subject: [32m''[39m, message: [32m''[39m }
+All Fields: [ [32m'name'[39m, [32m'email'[39m, [32m'subject'[39m, [32m'message'[39m ]
+Validation failed
+
+[90mstdout[2m | src/__tests__/Contact.test.tsx[2m > [22m[2mContact Component[2m > [22m[2msubmits form with valid data
+[22m[39mContact form submitted
+Sanitized Data: {
+  name: [32m'John Doe'[39m,
+  email: [32m'john@example.com'[39m,
+  subject: [32m'Test Subject'[39m,
+  message: [32m'This is a test message longer than 10 chars'[39m
+}
+All Fields: [ [32m'name'[39m, [32m'email'[39m, [32m'subject'[39m, [32m'message'[39m ]
+
+[90mstdout[2m | src/__tests__/Contact.test.tsx[2m > [22m[2mContact Component[2m > [22m[2mhandles submission error
+[22m[39mContact form submitted
+Sanitized Data: {
+  name: [32m'John Doe'[39m,
+  email: [32m'john@example.com'[39m,
+  subject: [32m'Test Subject'[39m,
+  message: [32m'This is a test message longer than 10 chars'[39m
+}
+All Fields: [ [32m'name'[39m, [32m'email'[39m, [32m'subject'[39m, [32m'message'[39m ]
+
+ [32m✓[39m src/__tests__/Contact.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 4396[2mms[22m[39m
+     [33m[2m✓[22m[39m renders contact form fields [33m 787[2mms[22m[39m
+     [33m[2m✓[22m[39m validates inputs and shows errors [33m 324[2mms[22m[39m
+     [33m[2m✓[22m[39m submits form with valid data [33m 1778[2mms[22m[39m
+     [33m[2m✓[22m[39m handles submission error [33m 1496[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 17:15:55
+[2m   Duration [22m 9.52s[2m (transform 619ms, setup 468ms, import 1.36s, tests 4.40s, environment 2.28s)[22m
+

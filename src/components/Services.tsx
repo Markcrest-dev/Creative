@@ -1,61 +1,14 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Box, Octahedron } from '@react-three/drei';
 import { motion, useInView } from 'framer-motion';
 import Footer from './Footer';
 import { useCart } from '../context/CartContext';
 import Navbar from './Navbar';
-import type * as THREE from 'three';
 import { PRODUCT_CATEGORIES } from '../data/products';
 
-// 3D Product Icon Component with animation
-const ProductIcon = ({
-  type,
-  color,
-  isActive,
-}: {
-  type: 'course' | 'asset';
-  color: string;
-  isActive: boolean;
-}) => {
-  const meshRef = useRef<THREE.Mesh>(null!);
-
-  useFrame((state) => {
-    if (meshRef.current && isActive) {
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime) * 0.2;
-      meshRef.current.rotation.y += 0.02;
-      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1;
-    } else if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
-    }
-  });
-
-  if (type === 'course') {
-    return (
-      <Octahedron ref={meshRef} args={[1, 0]}>
-        <meshStandardMaterial
-          color={color}
-          metalness={0.8}
-          roughness={0.2}
-          emissive={isActive ? color : '#000000'}
-          emissiveIntensity={isActive ? 0.4 : 0.1}
-        />
-      </Octahedron>
-    );
-  }
-
-  return (
-    <Box ref={meshRef} args={[1.2, 1.2, 1.2]}>
-      <meshStandardMaterial
-        color={color}
-        metalness={0.6}
-        roughness={0.3}
-        emissive={isActive ? color : '#000000'}
-        emissiveIntensity={isActive ? 0.4 : 0.1}
-      />
-    </Box>
-  );
+// Icon mapping for product types
+const getProductIcon = (type: string) => {
+  return type === 'course' ? '🎓' : '🎨';
 };
 
 // Product/Course Card
@@ -95,24 +48,33 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      {/* 3D Preview Area */}
-      <div className="h-48 relative bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Product Preview Area */}
+      <div
+        className="h-48 relative overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${product.color}15 0%, ${product.color}40 100%)`
+        }}
+      >
         <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm z-10 uppercase tracking-wider text-gray-600">
           {product.type}
         </div>
-        <Canvas camera={{ position: [0, 0, 3.5], fov: 50 }}>
-          <ambientLight intensity={0.6} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} color={product.color} />
-          <ProductIcon type={product.type} color={product.color} isActive={isHovered} />
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            autoRotate={true}
-            autoRotateSpeed={isHovered ? 4 : 1}
-            enabled={window.innerWidth > 768}
-          />
-        </Canvas>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className={`text-8xl transition-all duration-500 ${isHovered ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}`}
+            style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' }}
+          >
+            {getProductIcon(product.type)}
+          </div>
+        </div>
+        {/* Decorative circles */}
+        <div
+          className="absolute -top-10 -right-10 w-32 h-32 rounded-full opacity-20"
+          style={{ backgroundColor: product.color }}
+        />
+        <div
+          className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full opacity-20"
+          style={{ backgroundColor: product.color }}
+        />
       </div>
 
       {/* Content */}
@@ -174,16 +136,20 @@ const Services = () => {
 
       {/* Hero Section */}
       <div className="bg-black text-white py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <Canvas camera={{ position: [0, 0, 5] }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            <OrbitControls autoRotate enableZoom={false} />
-            <mesh>
-              <torusKnotGeometry args={[10, 3, 100, 16]} />
-              <meshStandardMaterial color="#f97316" wireframe />
-            </mesh>
-          </Canvas>
+        {/* Decorative background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
+            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f97316" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+          </div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">

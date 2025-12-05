@@ -1,22 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stage } from '@react-three/drei';
 import { ApiService } from '../services/apiService';
 import type { PortfolioProject } from '../types/api';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import Modal from './Modal';
 
-// 3D Model Placeholder
-const ProjectModel = ({ color }: { color: string }) => {
-  return (
-    <mesh>
-      <boxGeometry args={[1.5, 1.5, 1.5]} />
-      <meshStandardMaterial color={color} metalness={0.5} roughness={0.2} />
-    </mesh>
-  );
-};
+
 
 const Portfolio = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
@@ -98,11 +88,10 @@ const Portfolio = () => {
                 <button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    filter === cat.id
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === cat.id
                       ? 'bg-black text-white shadow-lg'
                       : 'bg-white text-gray-600 hover:bg-gray-100'
-                  }`}
+                    }`}
                 >
                   {cat.label}
                 </button>
@@ -140,18 +129,34 @@ const Portfolio = () => {
                   className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer group"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="h-64 relative bg-gray-100">
+                  <div
+                    className="h-64 relative overflow-hidden"
+                    style={{
+                      background: `linear-gradient(135deg, ${project.color}20 0%, ${project.color}60 100%)`
+                    }}
+                  >
                     <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                       {project.category}
                     </div>
-                    <Canvas shadows camera={{ position: [0, 0, 4], fov: 50 }}>
-                      <ambientLight intensity={0.5} />
-                      <pointLight position={[10, 10, 10]} intensity={1} />
-                      <Stage environment="city" intensity={0.5}>
-                        <ProjectModel color={project.color} />
-                      </Stage>
-                      <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={2} />
-                    </Canvas>
+                    {/* Decorative geometric shapes */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div
+                        className="w-48 h-48 transform rotate-45 transition-transform duration-700 group-hover:rotate-90 group-hover:scale-110"
+                        style={{
+                          backgroundColor: project.color,
+                          opacity: 0.3,
+                          boxShadow: `0 20px 60px ${project.color}40`
+                        }}
+                      />
+                    </div>
+                    <div
+                      className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full opacity-20"
+                      style={{ backgroundColor: project.color }}
+                    />
+                    <div
+                      className="absolute -top-10 -left-10 w-32 h-32 rounded-full opacity-20"
+                      style={{ backgroundColor: project.color }}
+                    />
                   </div>
 
                   <div className="p-6">
@@ -206,15 +211,22 @@ const Portfolio = () => {
       >
         {selectedProject && (
           <div className="space-y-6">
-            <div className="h-64 bg-gray-100 rounded-xl overflow-hidden">
-              <Canvas shadows camera={{ position: [0, 0, 4], fov: 50 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <Stage environment="city" intensity={0.5}>
-                  <ProjectModel color={selectedProject.color} />
-                </Stage>
-                <OrbitControls autoRotate />
-              </Canvas>
+            <div
+              className="h-64 rounded-xl overflow-hidden"
+              style={{
+                background: `linear-gradient(135deg, ${selectedProject.color}20 0%, ${selectedProject.color}60 100%)`
+              }}
+            >
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div
+                  className="w-56 h-56 transform rotate-45"
+                  style={{
+                    backgroundColor: selectedProject.color,
+                    opacity: 0.4,
+                    boxShadow: `0 25px 70px ${selectedProject.color}50`
+                  }}
+                />
+              </div>
             </div>
 
             <div>

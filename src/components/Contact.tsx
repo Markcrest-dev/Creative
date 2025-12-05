@@ -1,7 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import { Mesh } from 'three';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Sphere, MeshDistortMaterial } from '@react-three/drei';
+import { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Modal from './Modal';
 import Tooltip from './Tooltip';
@@ -12,30 +9,7 @@ import { ApiService } from '../services/apiService';
 import { ContactFormData } from '../types/api';
 import { motion } from 'framer-motion';
 
-// Animated 3D Contact Icon
-const ContactIcon = () => {
-  const meshRef = useRef<Mesh>(null!);
 
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
-    }
-  });
-
-  return (
-    <Sphere args={[1, 32, 32]} ref={meshRef} scale={1.5}>
-      <MeshDistortMaterial
-        color="#f97316"
-        attach="material"
-        distort={0.5}
-        speed={2}
-        roughness={0.2}
-        metalness={0.8}
-      />
-    </Sphere>
-  );
-};
 
 const Contact = () => {
   const {
@@ -380,23 +354,19 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* 3D Visualization */}
+            {/* Connect Illustration */}
             <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">Let's Connect</h2>
-              <div className="h-48 sm:h-56 md:h-64 relative">
-                <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[10, 10, 10]} intensity={1} />
-                  <ContactIcon />
-                  <OrbitControls
-                    enableZoom={true}
-                    enablePan={false}
-                    autoRotate={true}
-                    autoRotateSpeed={1}
-                    // Disable orbit controls on mobile for better UX
-                    enabled={window.innerWidth > 768}
-                  />
-                </Canvas>
+              <div className="h-48 sm:h-56 md:h-64 relative bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl overflow-hidden flex items-center justify-center">
+                {/* Connection icon illustration */}
+                <div className="text-center">
+                  <div className="text-8xl mb-4 animate-pulse">🤝</div>
+                  <p className="text-gray-700 font-medium text-lg">We're here to help!</p>
+                  <p className="text-gray-500 text-sm mt-2">Let's create something amazing together</p>
+                </div>
+                {/* Decorative elements */}
+                <div className="absolute top-4 right-4 w-20 h-20 bg-orange-500 rounded-full opacity-10 animate-ping"></div>
+                <div className="absolute bottom-4 left-4 w-16 h-16 bg-orange-500 rounded-full opacity-10"></div>
               </div>
             </div>
           </motion.div>

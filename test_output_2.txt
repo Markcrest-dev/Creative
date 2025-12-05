@@ -1,0 +1,721 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.14 [39m[90m/home/mark/Desktop/Creative[39m
+
+[90mstdout[2m | src/__tests__/Contact.test.tsx[2m > [22m[2mContact Component[2m > [22m[2msubmits form with valid data
+[22m[39mContact form submitted
+Sanitized Data: {
+  name: [32m'John Doe'[39m,
+  email: [32m'john@example.com'[39m,
+  subject: [32m'Test Subject'[39m,
+  message: [32m'This is a test message longer than 10 chars'[39m
+}
+All Fields: [ [32m'name'[39m, [32m'email'[39m, [32m'subject'[39m, [32m'message'[39m ]
+
+[90mstdout[2m | src/__tests__/Contact.test.tsx[2m > [22m[2mContact Component[2m > [22m[2mhandles submission error
+[22m[39mContact form submitted
+Sanitized Data: {
+  name: [32m'John Doe'[39m,
+  email: [32m'john@example.com'[39m,
+  subject: [32m'Test Subject'[39m,
+  message: [32m'This is a test message longer than 10 chars'[39m
+}
+All Fields: [ [32m'name'[39m, [32m'email'[39m, [32m'subject'[39m, [32m'message'[39m ]
+
+ [31m❯[39m src/__tests__/Contact.test.tsx [2m([22m[2m4 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 5713[2mms[22m[39m
+     [33m[2m✓[22m[39m renders contact form fields [33m 755[2mms[22m[39m
+[31m     [31m×[31m validates inputs and shows errors[39m[33m 1394[2mms[22m[39m
+     [33m[2m✓[22m[39m submits form with valid data [33m 2170[2mms[22m[39m
+     [33m[2m✓[22m[39m handles submission error [33m 1387[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/__tests__/Contact.test.tsx[2m > [22mContact Component[2m > [22mvalidates inputs and shows errors
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /name is required/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-gray-100 flex flex-col"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mdata-testid[39m=[32m"navbar"[39m
+      [36m>[39m
+        [0mNavbar[0m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"container mx-auto px-4 sm:px-6 py-24 md:py-32 flex-grow"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"text-center mb-10 md:mb-16"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [0mContact Creative★[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-base md:text-xl text-gray-600 max-w-3xl mx-auto px-2"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [0mHave a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"bg-white rounded-xl shadow-lg p-6 md:p-8"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"text-2xl md:text-3xl font-bold mb-6"[39m
+            [36m>[39m
+              [0mSend us a message[0m
+            [36m</h2>[39m
+            [36m<form>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"name"[39m
+                [36m>[39m
+                  [0mName[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"name"[39m
+                  [33mname[39m=[32m"name"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"email"[39m
+                [36m>[39m
+                  [0mEmail[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"email"[39m
+                  [33mname[39m=[32m"email"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"email"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"subject"[39m
+                [36m>[39m
+                  [0mSubject[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"subject"[39m
+                  [33mname[39m=[32m"subject"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"message"[39m
+                [36m>[39m
+                  [0mMessage[0m
+                [36m</label>[39m
+                [36m<textarea[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"message"[39m
+                  [33mname[39m=[32m"message"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mrows[39m=[32m"5"[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"w-full bg-black text-white px-6 py-4 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mSend Message[0m
+              [36m</button>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mstyle[39m=[32m"opacity: 0.9105969698575791; transform: translateX(4.470151507121045px);"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8"[39m
+            [36m>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"text-2xl md:text-3xl font-bold mb-6"[39m
+              [36m>[39m
+                [0mContact Information[0m
+              [36m</h2>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"space-y-6"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mPhone[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0m+1 (555) 123-4567[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mEmail[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0mhello@creative-star.com[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M15 11a3 3 0 11-6 0 3 3 0 016 0z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mOffice[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0m123 Creative Street[0m
+                      [36m<br />[39m
+                      [0mDesign District, CA 90210[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mBusiness Hours[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0mMonday - Friday: 9AM - 6PM[0m
+                    [36m</p>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0mSaturday: 10AM - 4PM[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mt-8"[39m
+              [36m>[39m
+                [36m<div>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors font-medium"[39m
+                  [36m>[39m
+                    [0mView Office Location[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"bg-white rounded-xl shadow-lg p-6 md:p-8"[39m
+            [36m>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"text-2xl md:text-3xl font-bold mb-6"[39m
+              [36m>[39m
+                [0mLet's Connect[0m
+              [36m</h2>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"h-48 sm:h-56 md:h-64 relative"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mdata-testid[39m=[32m"canvas"[39m
+                [36m>[39m
+                  [36m<ambientlight[39m
+                    [33mintensity[39m=[32m"0.5"[39m
+                  [36m/>[39m
+                  [36m<pointlight[39m
+                    [33mintensity[39m=[32m"1"[39m
+                    [33mposition[39m=[32m"10,10,10"[39m
+                  [36m/>[39m
+                  [36m<div />[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mdata-testid[39m=[32m"footer"[39m
+      [36m>[39m
+        [0mFooter[0m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-gray-100 flex flex-col"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mdata-testid[39m=[32m"navbar"[39m
+      [36m>[39m
+        [0mNavbar[0m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"container mx-auto px-4 sm:px-6 py-24 md:py-32 flex-grow"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"text-center mb-10 md:mb-16"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [0mContact Creative★[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-base md:text-xl text-gray-600 max-w-3xl mx-auto px-2"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [0mHave a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"bg-white rounded-xl shadow-lg p-6 md:p-8"[39m
+            [33mstyle[39m=[32m"opacity: 1; transform: none;"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"text-2xl md:text-3xl font-bold mb-6"[39m
+            [36m>[39m
+              [0mSend us a message[0m
+            [36m</h2>[39m
+            [36m<form>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"name"[39m
+                [36m>[39m
+                  [0mName[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"name"[39m
+                  [33mname[39m=[32m"name"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"email"[39m
+                [36m>[39m
+                  [0mEmail[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"email"[39m
+                  [33mname[39m=[32m"email"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"email"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"subject"[39m
+                [36m>[39m
+                  [0mSubject[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"subject"[39m
+                  [33mname[39m=[32m"subject"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-5 md:mb-6"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"block text-gray-700 font-medium mb-2 text-sm md:text-base"[39m
+                  [33mfor[39m=[32m"message"[39m
+                [36m>[39m
+                  [0mMessage[0m
+                [36m</label>[39m
+                [36m<textarea[39m
+                  [33mclass[39m=[32m"w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base border-gray-300"[39m
+                  [33mid[39m=[32m"message"[39m
+                  [33mname[39m=[32m"message"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mrows[39m=[32m"5"[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"w-full bg-black text-white px-6 py-4 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mSend Message[0m
+              [36m</button>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mstyle[39m=[32m"opacity: 0.9105969698575791; transform: translateX(4.470151507121045px);"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8"[39m
+            [36m>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"text-2xl md:text-3xl font-bold mb-6"[39m
+              [36m>[39m
+                [0mContact Information[0m
+              [36m</h2>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"space-y-6"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mPhone[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0m+1 (555) 123-4567[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mEmail[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0mhello@creative-star.com[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M15 11a3 3 0 11-6 0 3 3 0 016 0z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mOffice[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0m123 Creative Street[0m
+                      [36m<br />[39m
+                      [0mDesign District, CA 90210[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex items-start"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"bg-orange-100 p-3 rounded-lg mr-4"[39m
+                  [36m>[39m
+                    [36m<svg[39m
+                      [33mclass[39m=[32m"w-6 h-6 text-orange-500"[39m
+                      [33mfill[39m=[32m"none"[39m
+                      [33mstroke[39m=[32m"currentColor"[39m
+                      [33mviewBox[39m=[32m"0 0 24 24"[39m
+                      [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                    [36m>[39m
+                      [36m<path[39m
+                        [33md[39m=[32m"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"[39m
+                        [33mstroke-linecap[39m=[32m"round"[39m
+                        [33mstroke-linejoin[39m=[32m"round"[39m
+                        [33mstroke-width[39m=[32m"2"[39m
+                      [36m/>[39m
+                    [36m</svg>[39m
+                  [36m</div>[39m
+                  [36m<div>[39m
+                    [36m<h3[39m
+                      [33mclass[39m=[32m"font-bold text-lg md:text-xl mb-1"[39m
+                    [36m>[39m
+                      [0mBusiness Hours[0m
+                    [36m</h3>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0mMonday - Friday: 9AM - 6PM[0m
+                    [36m</p>[39m
+                    [36m<p[39m
+                      [33mclass[39m=[32m"text-gray-600 text-sm md:text-base"[39m
+                    [36m>[39m
+                      [0mSaturday: 10AM - 4PM[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mt-8"[39m
+              [36m>[39m
+                [36m<div>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors font-medium"[39m
+                  [36m>[39m
+                    [0mView Office Location[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"bg-white rounded-xl shadow-lg p-6 md:p-8"[39m
+            [36m>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"text-2xl md:text-3xl font-bold mb-6"[39m
+              [36m>[39m
+                [0mLet's Connect[0m
+              [36m</h2>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"h-48 sm:h-56 md:h-64 relative"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mdata-testid[39m=[32m"canvas"[39m
+                [36m>[39m
+                  [36m<ambientlight[39m
+                    [33mintensity[39m=[32m"0.5"[39m
+                  [36m/>[39m
+                  [36m<pointlight[39m
+                    [33mintensity[39m=[32m"1"[39m
+                    [33mposition[39m=[32m"10,10,10"[39m
+                  [36m/>[39m
+                  [36m<div />[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mdata-testid[39m=[32m"footer"[39m
+      [36m>[39m
+        [0mFooter[0m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2m❯[22m src/__tests__/Contact.test.tsx:[2m62:29[22m[39m
+    [90m 60| [39m
+    [90m 61| [39m        [90m// Check for validation errors[39m
+    [90m 62| [39m        expect(await screen.findByText(/name is required/i)).toBeInThe…
+    [90m   | [39m                            [31m^[39m
+    [90m 63| [39m        expect(await screen.findByText(/email is required/i)).toBeInTh…
+    [90m 64| [39m        expect(await screen.findByText(/subject is required/i)).toBeIn…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 17:14:55
+[2m   Duration [22m 10.74s[2m (transform 777ms, setup 538ms, import 1.47s, tests 5.71s, environment 2.02s)[22m
+
