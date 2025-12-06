@@ -38,8 +38,21 @@ class EmailService {
    * Initialize EmailJS with public key
    */
   private init(): void {
+    // Debug logging
+    console.log('EmailJS Init Attempt:', {
+      serviceId: this.serviceId || 'MISSING',
+      templateId: this.templateId || 'MISSING',
+      publicKey: this.publicKey ? this.publicKey.substring(0, 5) + '***' : 'MISSING',
+    });
+
     if (!this.serviceId || !this.templateId || !this.publicKey) {
-      logger.warn('EmailJS credentials not configured. Email service disabled.');
+      const msg = 'EmailJS credentials not configured. Email service disabled.';
+      logger.warn(msg);
+      console.error('❌ ' + msg);
+      console.log('Please check your .env file has:');
+      console.log('- VITE_EMAILJS_SERVICE_ID');
+      console.log('- VITE_EMAILJS_TEMPLATE_ID');
+      console.log('- VITE_EMAILJS_PUBLIC_KEY');
       return;
     }
 
@@ -47,8 +60,10 @@ class EmailService {
       emailjs.init(this.publicKey);
       this.initialized = true;
       logger.info('EmailJS initialized successfully');
+      console.log('✅ EmailJS initialized successfully');
     } catch (error) {
       logger.error('Failed to initialize EmailJS', error);
+      console.error('❌ Failed to initialize EmailJS:', error);
     }
   }
 
@@ -56,11 +71,16 @@ class EmailService {
    * Send email using EmailJS
    */
   async sendEmail(data: EmailData): Promise<EmailResponse> {
+    console.log('📧 Attempting to send email...');
+    console.log('Initialized:', this.initialized);
+
     if (!this.initialized) {
+      const msg = 'Email service not configured. Please contact us directly.';
       logger.warn('EmailJS not initialized - check environment variables');
+      console.error('❌ ' + msg);
       return {
         success: false,
-        message: 'Email service not configured. Please contact us directly.',
+        message: msg,
       };
     }
 
@@ -68,6 +88,12 @@ class EmailService {
       logger.info('Sending email via EmailJS', {
         from: data.from_email,
         subject: data.subject,
+      });
+
+      console.log('Sending with:', {
+        serviceId: this.serviceId,
+        templateId: this.templateId,
+        from: data.from_email,
       });
 
       const response = await emailjs.send(
@@ -82,6 +108,7 @@ class EmailService {
         }
       );
 
+      console.log('✅ Email sent successfully!', response);
       logger.info('Email sent successfully', { status: response.status });
 
       return {
@@ -90,6 +117,7 @@ class EmailService {
         messageId: response.text,
       };
     } catch (error) {
+      console.error('❌ Email send failed:', error);
       logger.error('Failed to send email', error);
 
       return {
