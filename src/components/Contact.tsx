@@ -5,8 +5,7 @@ import Tooltip from './Tooltip';
 import InteractiveMap from './InteractiveMap';
 import Navbar from './Navbar';
 import { useFormValidation } from '../hooks/useFormValidation';
-import { ApiService } from '../services/apiService';
-import { ContactFormData } from '../types/api';
+import { emailService } from '../services/emailService';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
@@ -22,7 +21,8 @@ const Contact = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shouldRenderMap, setShouldRenderMap] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
 
   // Delay map rendering for performance
   useEffect(() => {
@@ -48,8 +48,32 @@ const Contact = () => {
     };
 
     await handleSubmit(data, async (validData) => {
-      await ApiService.submitContactForm(validData as unknown as ContactFormData);
-      setIsSubmitted(true);
+      try {
+        // Send email using EmailJS
+        const emailResponse = await emailService.sendEmail({
+          from_name: validData.name,
+          from_email: validData.email,
+          subject: validData.subject,
+          message: validData.message,
+        });
+
+        if (emailResponse.success) {
+          setSubmitStatus('success');
+          setSubmitMessage(emailResponse.message);
+
+          // Reset form after successful submission
+          setTimeout(() => {
+            setSubmitStatus(null);
+            setSubmitMessage('');
+          }, 5000);
+        } else {
+          setSubmitStatus('error');
+          setSubmitMessage(emailResponse.message);
+        }
+      } catch (error) {
+        setSubmitStatus('error');
+        setSubmitMessage('An unexpected error occurred. Please try again.');
+      }
     });
   };
 
@@ -99,15 +123,21 @@ const Contact = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Send us a message</h2>
 
-            {isSubmitted ? (
-              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                <p>Thank you for your message! We'll get back to you soon.</p>
+            {submitStatus === 'success' && submitMessage && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <p>{submitMessage}</p>
               </div>
-            ) : null}
+            )}
 
-            {errors.submit && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-                <p>{errors.submit}</p>
+            {submitStatus === 'error' && submitMessage && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+                <p>{submitMessage}</p>
               </div>
             )}
 

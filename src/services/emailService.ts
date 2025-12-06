@@ -1,0 +1,122 @@
+/**
+ * Email Service - EmailJS Integration
+ * Handles contact form email delivery
+ */
+
+import emailjs from '@emailjs/browser';
+import { logger } from './logger';
+
+export interface EmailData {
+  from_name: string;
+  from_email: string;
+  subject: string;
+  message: string;
+  to_name?: string;
+}
+
+export interface EmailResponse {
+  success: boolean;
+  message: string;
+  messageId?: string;
+}
+
+class EmailService {
+  private serviceId: string;
+  private templateId: string;
+  private publicKey: string;
+  private initialized: boolean = false;
+
+  constructor() {
+    this.serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+    this.templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+    this.publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+
+    this.init();
+  }
+
+  /**
+   * Initialize EmailJS with public key
+   */
+  private init(): void {
+    if (!this.serviceId || !this.templateId || !this.publicKey) {
+      logger.warn('EmailJS credentials not configured. Email service disabled.');
+      return;
+    }
+
+    try {
+      emailjs.init(this.publicKey);
+      this.initialized = true;
+      logger.info('EmailJS initialized successfully');
+    } catch (error) {
+      logger.error('Failed to initialize EmailJS', error);
+    }
+  }
+
+  /**
+   * Send email using EmailJS
+   */
+  async sendEmail(data: EmailData): Promise<EmailResponse> {
+    if (!this.initialized) {
+      logger.warn('EmailJS not initialized - check environment variables');
+      return {
+        success: false,
+        message: 'Email service not configured. Please contact us directly.',
+      };
+    }
+
+    try {
+      logger.info('Sending email via EmailJS', {
+        from: data.from_email,
+        subject: data.subject,
+      });
+
+      const response = await emailjs.send(
+        this.serviceId,
+        this.templateId,
+        {
+          from_name: data.from_name,
+          from_email: data.from_email,
+          subject: data.subject,
+          message: data.message,
+          to_name: data.to_name || 'Creative Team',
+        }
+      );
+
+      logger.info('Email sent successfully', { status: response.status });
+
+      return {
+        success: true,
+        message: 'Your message has been sent successfully!',
+        messageId: response.text,
+      };
+    } catch (error) {
+      logger.error('Failed to send email', error);
+
+      return {
+        success: false,
+        message: error instanceof Error ? error.message : 'Failed to send email. Please try again.',
+      };
+    }
+  }
+
+  /**
+   * Validate email configuration
+   */
+  isConfigured(): boolean {
+    return this.initialized;
+  }
+
+  /**
+   * Get configuration status for debugging
+   */
+  getStatus(): { configured: boolean; serviceId: string; templateId: string } {
+    return {
+      configured: this.initialized,
+      serviceId: this.serviceId ? '***' : 'missing',
+      templateId: this.templateId ? '***' : 'missing',
+    };
+  }
+}
+
+// Export singleton instance
+export const emailService = new EmailService();

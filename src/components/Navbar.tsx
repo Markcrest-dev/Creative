@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import CompactAnimatedLogo from './CompactAnimatedLogo';
 import { useCart } from '../context/CartContext';
+import { ThemeToggle } from './ThemeToggle';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,7 +52,7 @@ const Navbar = () => {
           <div
             className={`flex items-center justify-between transition-all duration-500 ${
               isScrolled
-                ? 'bg-white/70 backdrop-blur-xl shadow-lg shadow-black/5 rounded-full px-6 py-3 border border-white/20'
+                ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl shadow-lg shadow-black/5 rounded-full px-6 py-3 border border-white/20 dark:border-gray-700/20'
                 : 'bg-transparent px-0 py-0'
             }`}
           >
@@ -63,7 +64,7 @@ const Navbar = () => {
                   <CompactAnimatedLogo />
                 </div>
               </div>
-              <span className="text-xl font-bold tracking-tight text-gray-900 relative">
+              <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white relative">
                 CREATIVE
                 <span className="text-orange-500 inline-block transform transition-transform duration-300 group-hover:rotate-180">
                   ★
@@ -78,13 +79,13 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full group ${
-                    isActive(link.path) ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
+                    isActive(link.path) ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                   }`}
                 >
                   {isActive(link.path) && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute inset-0 bg-gray-100 rounded-full -z-10"
+                      className="absolute inset-0 bg-gray-100 dark:bg-gray-800 rounded-full -z-10"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -95,10 +96,13 @@ const Navbar = () => {
 
             {/* Right Actions */}
             <div className="hidden md:flex items-center gap-4">
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
               {/* Cart Button */}
               <button
                 onClick={toggleCart}
-                className="relative group p-2 hover:bg-gray-100 rounded-full transition-colors duration-300"
+                className="relative group p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-300"
               >
                 <span className="text-xl block transform transition-transform duration-300 group-hover:scale-110">
                   🛒
@@ -109,7 +113,7 @@ const Navbar = () => {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      className="absolute top-0 right-0 bg-orange-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white shadow-sm"
+                      className="absolute top-0 right-0 bg-orange-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white dark:border-gray-900 shadow-sm"
                     >
                       {items.length}
                     </motion.span>

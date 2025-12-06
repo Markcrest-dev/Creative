@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { ContentService, BlogPost } from '../services/contentService';
+import { SkeletonGrid } from './Skeleton';
 
 const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [filter, setFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +33,18 @@ const Blog = () => {
     fetchData();
   }, []);
 
-  const filteredPosts = filter === 'All' ? posts : posts.filter((post) => post.category === filter);
+  const filteredPosts = posts.filter((post) => {
+    // Filter by category
+    const matchesCategory = filter === 'All' || post.category === filter;
+
+    // Filter by search query
+    const matchesSearch = !searchQuery ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -48,13 +61,58 @@ const Blog = () => {
             Insights & Thoughts
           </motion.h1>
           <motion.p
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 max-w-2xl mx-auto mb-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Expert perspectives on design, technology, and the future of digital experiences.
           </motion.p>
+
+          {/* Search Bar */}
+          <motion.div
+            className="max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-6 py-4 pl-12 rounded-full border-2 border-gray-200 focus:border-orange-500 focus:outline-none transition-colors text-lg"
+              />
+              <svg
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </motion.div>
         </div>
 
         {/* Categories */}
@@ -74,10 +132,25 @@ const Blog = () => {
           ))}
         </div>
 
+        {/* Results count */}
+        {searchQuery && (
+          <div className="text-center text-gray-600 mb-6">
+            Found {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''}
+            {searchQuery && ` for "${searchQuery}"`}
+          </div>
+        )}
+
         {/* Blog Grid */}
         {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+          <SkeletonGrid count={4} type="blog" />
+        ) : filteredPosts.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-2xl text-gray-600 mb-4">No articles found</p>
+            <p className="text-gray-500">
+              {searchQuery
+                ? `Try searching for something else`
+                : `Try selecting a different category`}
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
