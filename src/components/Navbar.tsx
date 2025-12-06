@@ -36,21 +36,24 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? 'py-4' : 'py-6'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+          isScrolled ? 'py-4' : 'py-6'
+        }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className={`container mx-auto px-6 transition-all duration-500 ${isScrolled ? 'max-w-5xl' : 'max-w-7xl'
-            }`}
+          className={`container mx-auto px-6 transition-all duration-500 ${
+            isScrolled ? 'max-w-5xl' : 'max-w-7xl'
+          }`}
         >
           <div
-            className={`flex items-center justify-between transition-all duration-500 ${isScrolled
+            className={`flex items-center justify-between transition-all duration-500 ${
+              isScrolled
                 ? 'bg-white/70 backdrop-blur-xl shadow-lg shadow-black/5 rounded-full px-6 py-3 border border-white/20'
                 : 'bg-transparent px-0 py-0'
-              }`}
+            }`}
           >
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
@@ -74,8 +77,9 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full group ${isActive(link.path) ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
-                    }`}
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-full group ${
+                    isActive(link.path) ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
+                  }`}
                 >
                   {isActive(link.path) && (
                     <motion.div
@@ -180,8 +184,11 @@ const Navbar = () => {
                     <Link
                       to={link.path}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`text-3xl font-bold tracking-tight transition-colors ${isActive(link.path) ? 'text-orange-500' : 'text-gray-900 hover:text-orange-500'
-                        }`}
+                      className={`text-3xl font-bold tracking-tight transition-colors ${
+                        isActive(link.path)
+                          ? 'text-orange-500'
+                          : 'text-gray-900 hover:text-orange-500'
+                      }`}
                     >
                       {link.name}
                     </Link>

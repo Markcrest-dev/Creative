@@ -85,8 +85,6 @@ export const useFormValidation = () => {
     [validateField]
   );
 
-
-
   // Validate entire form
   const validateForm = useCallback(
     (formData: Record<string, string>) => {

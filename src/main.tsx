@@ -25,9 +25,12 @@ if ('serviceWorker' in navigator) {
         console.log('[SW] Service Worker registered:', registration.scope);
 
         // Check for updates periodically
-        setInterval(() => {
-          registration.update();
-        }, 60 * 60 * 1000); // Check every hour
+        setInterval(
+          () => {
+            registration.update();
+          },
+          60 * 60 * 1000
+        ); // Check every hour
 
         // Handle service worker updates
         registration.addEventListener('updatefound', () => {
@@ -47,4 +50,3 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
-

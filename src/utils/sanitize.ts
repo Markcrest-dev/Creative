@@ -103,7 +103,9 @@ export const sanitizeObject = <T extends Record<string, unknown>>(obj: T): T => 
     if (typeof value === 'string') {
       (sanitized as Record<string, unknown>)[key] = sanitizeInput(value);
     } else if (typeof value === 'object' && value !== null) {
-      (sanitized as Record<string, unknown>)[key] = sanitizeObject(value as Record<string, unknown>);
+      (sanitized as Record<string, unknown>)[key] = sanitizeObject(
+        value as Record<string, unknown>
+      );
     }
   }
 

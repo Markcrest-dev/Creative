@@ -9,8 +9,6 @@ import { ApiService } from '../services/apiService';
 import { ContactFormData } from '../types/api';
 import { motion } from 'framer-motion';
 
-
-
 const Contact = () => {
   const {
     errors,
@@ -128,8 +126,9 @@ const Contact = () => {
                   value={fieldStates.name?.currentValue || ''}
                   onChange={handleChange}
                   onBlur={onBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${errors.name ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
                 {touchedFields.name && errors.name && (
@@ -154,8 +153,9 @@ const Contact = () => {
                   value={fieldStates.email?.currentValue || ''}
                   onChange={handleChange}
                   onBlur={onBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${errors.email ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
                 {touchedFields.email && errors.email && (
@@ -180,8 +180,9 @@ const Contact = () => {
                   value={fieldStates.subject?.currentValue || ''}
                   onChange={handleChange}
                   onBlur={onBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${errors.subject ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${
+                    errors.subject ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
                 {touchedFields.subject && errors.subject && (
@@ -206,8 +207,9 @@ const Contact = () => {
                   onChange={handleChange}
                   onBlur={onBlur}
                   rows={5}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${errors.message ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base ${
+                    errors.message ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 ></textarea>
                 {touchedFields.message && errors.message && (
@@ -362,7 +364,9 @@ const Contact = () => {
                 <div className="text-center">
                   <div className="text-8xl mb-4 animate-pulse">🤝</div>
                   <p className="text-gray-700 font-medium text-lg">We're here to help!</p>
-                  <p className="text-gray-500 text-sm mt-2">Let's create something amazing together</p>
+                  <p className="text-gray-500 text-sm mt-2">
+                    Let's create something amazing together
+                  </p>
                 </div>
                 {/* Decorative elements */}
                 <div className="absolute top-4 right-4 w-20 h-20 bg-orange-500 rounded-full opacity-10 animate-ping"></div>

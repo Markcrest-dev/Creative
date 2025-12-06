@@ -52,7 +52,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       <div
         className="h-48 relative overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${product.color}15 0%, ${product.color}40 100%)`
+          background: `linear-gradient(135deg, ${product.color}15 0%, ${product.color}40 100%)`,
         }}
       >
         <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-xs font-bold shadow-sm z-10 uppercase tracking-wider text-gray-600">

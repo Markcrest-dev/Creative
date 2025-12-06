@@ -6,8 +6,6 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import Modal from './Modal';
 
-
-
 const Portfolio = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<PortfolioProject[]>([]);
@@ -88,10 +86,11 @@ const Portfolio = () => {
                 <button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === cat.id
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    filter === cat.id
                       ? 'bg-black text-white shadow-lg'
                       : 'bg-white text-gray-600 hover:bg-gray-100'
-                    }`}
+                  }`}
                 >
                   {cat.label}
                 </button>
@@ -132,7 +131,7 @@ const Portfolio = () => {
                   <div
                     className="h-64 relative overflow-hidden"
                     style={{
-                      background: `linear-gradient(135deg, ${project.color}20 0%, ${project.color}60 100%)`
+                      background: `linear-gradient(135deg, ${project.color}20 0%, ${project.color}60 100%)`,
                     }}
                   >
                     <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
@@ -145,7 +144,7 @@ const Portfolio = () => {
                         style={{
                           backgroundColor: project.color,
                           opacity: 0.3,
-                          boxShadow: `0 20px 60px ${project.color}40`
+                          boxShadow: `0 20px 60px ${project.color}40`,
                         }}
                       />
                     </div>
@@ -214,7 +213,7 @@ const Portfolio = () => {
             <div
               className="h-64 rounded-xl overflow-hidden"
               style={{
-                background: `linear-gradient(135deg, ${selectedProject.color}20 0%, ${selectedProject.color}60 100%)`
+                background: `linear-gradient(135deg, ${selectedProject.color}20 0%, ${selectedProject.color}60 100%)`,
               }}
             >
               <div className="relative w-full h-full flex items-center justify-center">
@@ -223,7 +222,7 @@ const Portfolio = () => {
                   style={{
                     backgroundColor: selectedProject.color,
                     opacity: 0.4,
-                    boxShadow: `0 25px 70px ${selectedProject.color}50`
+                    boxShadow: `0 25px 70px ${selectedProject.color}50`,
                   }}
                 />
               </div>

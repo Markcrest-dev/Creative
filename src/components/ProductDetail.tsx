@@ -14,7 +14,8 @@ const ProductDetail = () => {
   // Find product by ID (slug)
   // In a real app, this would be an API call
   const product =
-    PRODUCTS.find((p: ProductItem) => p.title.toLowerCase().replace(/ /g, '-') === id) || PRODUCTS[0]; // Fallback for demo
+    PRODUCTS.find((p: ProductItem) => p.title.toLowerCase().replace(/ /g, '-') === id) ||
+    PRODUCTS[0]; // Fallback for demo
 
   if (!product) return <div>Product not found</div>;
 
