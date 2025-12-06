@@ -62,11 +62,11 @@ export function useApi<T>(endpoint: string, initialConfig?: RequestConfig): UseA
         });
 
         return response;
-      } catch (error: any) {
+      } catch (error: unknown) {
         const apiError: ApiError = {
-          message: error.message || 'An unexpected error occurred',
-          status: error.status || 500,
-          details: error.details,
+          message: error instanceof Error ? error.message : 'An unexpected error occurred',
+          status: (error as ApiError).status || 500,
+          details: (error as ApiError).details,
         };
 
         logger.error(`API Error in useApi (${endpoint})`, apiError);

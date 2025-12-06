@@ -58,17 +58,17 @@ export const usePerformanceOptimizations = () => {
   }, []);
 
   // Memoized function for expensive calculations
-  const memoizedCalculation = useCallback((callback: () => any) => {
+  const memoizedCalculation = useCallback(<T>(callback: () => T): T => {
     return callback();
   }, []);
 
   // Throttled function for performance
-  const useThrottle = (callback: (...args: any[]) => void, delay: number) => {
+  const useThrottle = <T extends unknown[]>(callback: (...args: T) => void, delay: number) => {
     const lastCall = useRef(0);
     const timeout = useRef<Timeout | null>(null);
 
     return useCallback(
-      (...args: any[]) => {
+      (...args: T) => {
         const now = Date.now();
 
         if (timeout.current) {
@@ -93,11 +93,11 @@ export const usePerformanceOptimizations = () => {
   };
 
   // Debounced function for performance
-  const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
+  const useDebounce = <T extends unknown[]>(callback: (...args: T) => void, delay: number) => {
     const timeout = useRef<Timeout | null>(null);
 
     return useCallback(
-      (...args: any[]) => {
+      (...args: T) => {
         if (timeout.current) {
           clearTimeout(timeout.current);
         }

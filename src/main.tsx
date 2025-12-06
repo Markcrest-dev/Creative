@@ -6,6 +6,14 @@ import { AppProvider } from './context/AppContext.tsx';
 import './index.css';
 import './mobile.css';
 
+// Initialize Web Vitals tracking
+import { initWebVitals } from './utils/webVitals';
+initWebVitals();
+
+// Initialize Analytics
+import { analytics } from './services/analytics';
+analytics.init();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -50,3 +58,4 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+

@@ -5,6 +5,7 @@
 
 import { logger } from '../services/logger';
 import { config } from '../config/env';
+import { rateLimiterManager } from '../utils/rateLimit';
 import type { ApiResponse, ApiError, RequestConfig } from '../types/api';
 
 export class ApiClient {
@@ -22,48 +23,51 @@ export class ApiClient {
    * Generic request method with retries and error handling
    */
   private async request<T>(endpoint: string, options: RequestConfig = {}): Promise<ApiResponse<T>> {
-    const { method = 'GET', body, headers = {}, retries = 3, timeout = 10000 } = options;
+    // Wrap with rate limiting
+    return rateLimiterManager.execute(endpoint, async () => {
+      const { method = 'GET', body, headers = {}, retries = 3, timeout = 10000 } = options;
 
-    const url = `${this.baseURL}${endpoint}`;
-    const requestHeaders = { ...this.defaultHeaders, ...headers };
+      const url = `${this.baseURL}${endpoint}`;
+      const requestHeaders = { ...this.defaultHeaders, ...headers };
 
-    // Create abort controller for timeout
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
+      // Create abort controller for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-    try {
-      logger.info(`API Request: ${method} ${endpoint}`);
+      try {
+        logger.info(`API Request: ${method} ${endpoint}`);
 
-      const response = await this.fetchWithRetry(
-        url,
-        {
-          method,
-          headers: requestHeaders,
-          body: body ? JSON.stringify(body) : undefined,
-          signal: controller.signal,
-        },
-        retries
-      );
+        const response = await this.fetchWithRetry(
+          url,
+          {
+            method,
+            headers: requestHeaders,
+            body: body ? JSON.stringify(body) : undefined,
+            signal: controller.signal,
+          },
+          retries
+        );
 
-      clearTimeout(timeoutId);
+        clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw await this.handleErrorResponse(response);
+        if (!response.ok) {
+          throw await this.handleErrorResponse(response);
+        }
+
+        const data = await response.json();
+        logger.info(`API Success: ${method} ${endpoint}`, data);
+
+        return {
+          data,
+          status: response.status,
+          headers: response.headers,
+        };
+      } catch (error) {
+        clearTimeout(timeoutId);
+        logger.error(`API Error: ${method} ${endpoint}`, error);
+        throw this.normalizeError(error);
       }
-
-      const data = await response.json();
-      logger.info(`API Success: ${method} ${endpoint}`, data);
-
-      return {
-        data,
-        status: response.status,
-        headers: response.headers,
-      };
-    } catch (error) {
-      clearTimeout(timeoutId);
-      logger.error(`API Error: ${method} ${endpoint}`, error);
-      throw this.normalizeError(error);
-    }
+    });
   }
 
   /**

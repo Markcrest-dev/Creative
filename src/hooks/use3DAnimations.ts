@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import * as THREE from 'three';
+import type { RootState } from '@react-three/fiber';
 
 // Custom hook for advanced 3D animations
 export const use3DAnimations = () => {
@@ -32,7 +33,7 @@ export const use3DAnimations = () => {
 
   // Advanced animation loop with scroll-based effects
   const animate3D = useCallback(
-    (state: any, delta: number) => {
+    (state: RootState, delta: number) => {
       if (groupRef.current) {
         // Gentle floating animation
         groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
@@ -79,8 +80,8 @@ export const use3DAnimations = () => {
 
   // Complex animation sequence
   const runAnimationSequence = useCallback(
-    (sequence: Array<(state: any, delta: number) => void>, currentIndex: number) => {
-      return (state: any, delta: number) => {
+    (sequence: Array<(state: RootState, delta: number) => void>, currentIndex: number) => {
+      return (state: RootState, delta: number) => {
         if (currentIndex < sequence.length) {
           sequence[currentIndex](state, delta);
         }

@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { useCart } from '../context/CartContext';
 import Navbar from './Navbar';
 import { PRODUCT_CATEGORIES } from '../data/products';
+import type { Product } from '../types/components';
 
 // Icon mapping for product types
 const getProductIcon = (type: string) => {
@@ -12,7 +13,7 @@ const getProductIcon = (type: string) => {
 };
 
 // Product/Course Card
-const ProductCard = ({ product, index }: { product: any; index: number }) => {
+const ProductCard = ({ product, index }: { product: Product; index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   const [isHovered, setIsHovered] = useState(false);
@@ -186,7 +187,10 @@ const Services = () => {
       <div className="container mx-auto px-4 sm:px-6 py-12 md:py-20 flex-grow">
         <div className="space-y-20">
           {products.map((category, categoryIndex) => (
-            <div key={categoryIndex}>
+            <div
+              key={categoryIndex}
+              id={category.category.toLowerCase().replace(/ /g, '-')}
+            >
               <motion.div
                 className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-gray-200 pb-4"
                 initial={{ opacity: 0, y: 20 }}

@@ -9,6 +9,7 @@ import { config } from '../config/env';
 
 /**
  * Report web vitals metric
+ * @param metric The web vital metric to report.
  */
 const reportMetric = (metric: Metric) => {
   // Log in development
@@ -24,13 +25,14 @@ const reportMetric = (metric: Metric) => {
 
 declare global {
   interface Window {
-    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void;
   }
 }
 
 /**
  * Send metric to analytics service
  * Integrate with Google Analytics, DataDog, New Relic, etc.
+ * @param metric The performance metric to send.
  */
 const sendToAnalytics = (metric: Metric) => {
   // Example: Google Analytics 4
@@ -78,6 +80,7 @@ export const initWebVitals = () => {
 
 /**
  * Get performance marks for custom measurements
+ * @param markName The name of the performance mark to create.
  */
 export const measurePerformance = (markName: string) => {
   if (typeof window === 'undefined' || !window.performance) return;
@@ -91,6 +94,9 @@ export const measurePerformance = (markName: string) => {
 
 /**
  * Measure duration between two marks
+ * @param name The name for the performance measure.
+ * @param startMark The name of the starting performance mark.
+ * @param endMark The name of the ending performance mark.
  */
 export const measureDuration = (name: string, startMark: string, endMark: string) => {
   if (typeof window === 'undefined' || !window.performance) return;

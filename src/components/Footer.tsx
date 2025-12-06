@@ -141,44 +141,44 @@ const Footer = () => {
             <h3 className="text-lg md:text-xl font-semibold mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services#design-courses"
                   className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
                 >
                   UI/UX Design
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services#development-courses"
                   className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
                 >
                   Web Development
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services#3d-assets"
                   className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
                 >
                   3D Visualization
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services#design-courses"
                   className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
                 >
                   Brand Identity
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/services#development-courses"
                   className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
                 >
                   Digital Marketing
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

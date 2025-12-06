@@ -68,3 +68,45 @@ export interface IconProps extends BaseProps {
   color?: string;
   strokeWidth?: number;
 }
+
+// Team Member types for About component
+export interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+
+export interface TeamMemberData {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  social: SocialLink[];
+}
+
+// Product types for Services component
+export interface Product {
+  title: string;
+  description: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  tags: string[];
+  type: 'course' | 'asset';
+  color: string;
+}
+
+export interface ProductCategory {
+  category: string;
+  description: string;
+  items: Product[];
+}
+
+// Performance Metric types
+export interface PerformanceMetric {
+  name: string;
+  value: number;
+  rating: 'good' | 'needs-improvement' | 'poor';
+  delta: number;
+  id: string;
+}

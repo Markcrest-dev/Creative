@@ -10,7 +10,7 @@ export type LogLevel = 'info' | 'warn' | 'error' | 'debug';
 interface LogEntry {
   level: LogLevel;
   message: string;
-  data?: any;
+  data?: unknown;
   timestamp: Date;
   context?: string;
 }
@@ -33,7 +33,7 @@ class Logger {
   /**
    * Main logging method
    */
-  private log(level: LogLevel, message: string, data?: any, context?: string): void {
+  private log(level: LogLevel, message: string, data?: unknown, context?: string): void {
     if (!this.shouldLog(level)) return;
 
     const logEntry: LogEntry = {
@@ -143,33 +143,33 @@ class Logger {
   /**
    * Public logging methods
    */
-  public debug(message: string, data?: any, context?: string): void {
+  public debug(message: string, data?: unknown, context?: string): void {
     this.log('debug', message, data, context);
   }
 
-  public info(message: string, data?: any, context?: string): void {
+  public info(message: string, data?: unknown, context?: string): void {
     this.log('info', message, data, context);
   }
 
-  public warn(message: string, data?: any, context?: string): void {
+  public warn(message: string, data?: unknown, context?: string): void {
     this.log('warn', message, data, context);
   }
 
-  public error(message: string, data?: any, context?: string): void {
+  public error(message: string, data?: unknown, context?: string): void {
     this.log('error', message, data, context);
   }
 
   /**
    * Log API calls
    */
-  public apiCall(method: string, url: string, data?: any): void {
+  public apiCall(method: string, url: string, data?: unknown): void {
     this.debug(`API ${method} ${url}`, data, 'API');
   }
 
   /**
    * Log API errors
    */
-  public apiError(method: string, url: string, error: any): void {
+  public apiError(method: string, url: string, error: unknown): void {
     this.error(`API ${method} ${url} failed`, error, 'API');
   }
 

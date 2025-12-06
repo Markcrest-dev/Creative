@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Tooltip from './Tooltip';
 import AnimatedLogo from './AnimatedLogo';
 import Navbar from './Navbar';
+import type { TeamMemberData, SocialLink } from '../types/components';
 
 // Stat Display (showing final value)
 const StatCounter = ({ end, label }: { end: number; label: string }) => {
@@ -19,7 +20,7 @@ const StatCounter = ({ end, label }: { end: number; label: string }) => {
 };
 
 // Team Member Card
-const TeamMember = ({ member }: { member: any }) => {
+const TeamMember = ({ member }: { member: TeamMemberData }) => {
   return (
     <motion.div className="bg-white rounded-xl shadow-lg overflow-hidden" whileHover={{ y: -10 }}>
       <div className="h-48 relative">
@@ -38,7 +39,7 @@ const TeamMember = ({ member }: { member: any }) => {
       <div className="p-6">
         <p className="text-gray-600 text-sm mb-4">{member.bio}</p>
         <div className="flex space-x-4">
-          {member.social.map((social: any, index: number) => (
+          {member.social.map((social: SocialLink, index: number) => (
             <a
               key={index}
               href={social.url}
